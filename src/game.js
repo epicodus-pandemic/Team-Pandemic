@@ -27,21 +27,27 @@ export class Player {
   // }
 }
 
-
+// possible functions add in population and disease counts as a percentage of population. 
 class City {
   constructor(){
     this.diseaseCount = 0;
-
   }
 }
 
+//add in other cities
 export class Game {
   constructor(){
-    let tokyo = new City();
-    let paris = new City();
-    let seattle = new City(); 
+    this.tokyo = new City();
+    this.paris = new City();
+    this.seattle = new City(); 
+    this.toronto = new City();
+    this.cairo = new City();
+    this.beijing = new City();
+    this.rio = new City();
+    this.la = new City();
+    this.moscow = new City();
     this.isGameOver = false;
-    this.cities = [tokyo, paris, seattle];
+    this.cities = [this.tokyo, this.paris, this.seattle, this.toronto, this.cairo, this.beijing, this.rio,this.la, this.moscow];
     this.player = new Player();
   }
   //  To check the city number for subtraction needed for decreasing action pts.
@@ -56,10 +62,11 @@ export class Game {
     }
     return totalDisease;
   }
-
+// move away from using index locations in array into using close cities 
   setPlayerLocation(cityIndex){
     this.player.currentLocation = cityIndex;
   }
+
 
   infect(cityIndex){
       console.log("before infect/ disease in seattle: ", this.cities[2].diseaseCount);
@@ -82,15 +89,17 @@ export class Game {
     console.log("after infect/ disease in seattle: ", this.cities[2].diseaseCount);
   }
 
-  setInfectTimer(cityIndex){
-    setInterval(() => {
-      this.infect(cityIndex);
-    }, 12000);
-  }
 
-  setMoveTimer(){
-    setInterval(() => {
-      this.player.setActionPoints();
-    }, 6000);
-  }
+  // Backend Timers 
+  // setInfectTimer(cityIndex){
+  //   setInterval(() => {
+  //     this.infect(cityIndex);
+  //   }, 12000);
+  // }
+
+  // setMoveTimer(){
+  //   setInterval(() => {
+  //     this.player.setActionPoints();
+  //   }, 6000);
+  // }
 }
