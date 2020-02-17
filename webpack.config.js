@@ -1,7 +1,7 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
-const UglifyJsPlugin = require('uglifyjs-webpack-plugin'); 
+const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 
 module.exports = {
   entry: './src/main.js',
@@ -32,10 +32,9 @@ module.exports = {
         ]
       },
       {
-        test: /\.(jpg|png)$/,
+        test: /\.(jpe?g|png|gif)$/i,
         use: [
          'file-loader',
-         'url-loader',
         ],
       },
       {

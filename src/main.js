@@ -6,10 +6,9 @@ import Map from './map.jpg';
 import { Game, Player } from './game';
 
 // Add the image to our existing div.
-const myIcon = new Image();
-myIcon.src = Icon;
-
-$("#mapDiv").appendChild(myIcon);
+const map = new Image();
+map.src = Map;
+$("#mapDiv").append(map);
 
 function checkTime(i) {
   if (i < 10) {
