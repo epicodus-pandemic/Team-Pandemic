@@ -1,32 +1,45 @@
 import { Game, Player } from '../src/game.js';
 
 describe("City", () => {
+  let game;
   beforeEach(function() {
-    game = new Game();
+     game = new Game();
   })
 
-  afterEach(function() {
-  })
   test("new game should be created with new cities with diseaseCount equal to zero", ()=>{
     expect(game.paris.diseaseCount).toEqual(0);
     expect(game.seattle.diseaseCount).toEqual(0);
     expect(game.paris.diseaseCount).toEqual(0);
     expect(game.toronto.diseaseCount).toEqual(0);
-    expect(game.cairo.diseaseCount).toEqual(0);
+    expect(game.baghdad.diseaseCount).toEqual(0);
+    expect(game.nairobi.diseaseCount).toEqual(0);
     expect(game.beijing.diseaseCount).toEqual(0);
     expect(game.rio.diseaseCount).toEqual(0);
     expect(game.la.diseaseCount).toEqual(0);
     expect(game.moscow.diseaseCount).toEqual(0);
-  })
+    })
   test(" new player is created with 0 action points", () =>{
     expect (game.player.actionPoints).toEqual(0);
   })
 
-  // test(" When game is initated tokyo has name property and holds an array of other cities", () =>{
-  //   expect (game.tokyo.name).toEqual("tokyo");
-  //   expect (game.tokyo.connections[1]).toEqual(game.beijing);
-  // })
+  test(" When game is initated tokyo has name property", () =>{
+    expect (game.tokyo.name).toEqual("tokyo");
+  })
+  test("method addconnections adds other cities to an array within the city class", () =>{
+    expect (game.tokyo.connections).toEqual([game.seattle, game.beijing,game.moscow]);
+    expect (game.paris.connections).toEqual([game.moscow, game.toronto, game.baghdad]);
+    expect (game.seattle.connections).toEqual([game.toronto, game.tokyo, game.la]);
+    expect (game.toronto.connections).toEqual([game.seattle, game.paris]);
+    expect (game.baghdad.connections).toEqual([game.beijing, game.nairobi, game.paris]);
+    expect (game.nairobi.connections).toEqual([game.rio, game.baghdad]);
+    expect (game.rio.connections).toEqual([game.la, game.nairobi]);
+    expect (game.beijing.connections).toEqual([game.moscow, game.baghdad, game.tokyo, game.la])
+    expect (game.la.connections).toEqual([game.beijing, game.seattle, game.rio]);
+    expect (game.moscow.connections).toEqual([game.paris, game.beijing, game.tokyo]);
+  })
 })
+
+
 
 
 
