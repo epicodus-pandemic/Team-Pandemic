@@ -35,7 +35,7 @@ class City {
 
 export class Game {
   constructor(){
-    this.tokyo = new City("tokyo", [this.beijing, this.moscow, this.seattle]);
+    this.tokyo = new City();
     this.paris = new City();
     this.seattle = new City(); 
     this.toronto = new City();
