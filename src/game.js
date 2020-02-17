@@ -19,35 +19,42 @@ export class Player {
 }
 // needs to add in Connections for each city.
 class City {
-  constructor(name, connections){
+  constructor(name){
     this.name = name
     this.diseaseCount = 0;
-    this.connections = connections;
+    // this.connections = connections;
   }
-  addOneConnection(city){
-    this.connections.push(city)
-    //this.tokyo.addConnection(paris, seattle, )
-  }
-  addConnections(cities){
-    this.connections = cities;
+  addConnections(connectedCities){
+    this.connections = connectedCities;
   }
 }
 
 export class Game {
   constructor(){
-    this.tokyo = new City("tokyo", [this.beijing, this.moscow, this.seattle]);
-    this.paris = new City();
-    this.seattle = new City(); 
-    this.toronto = new City();
-    this.cairo = new City();
-    this.beijing = new City();
-    this.rio = new City();
-    this.la = new City();
-    this.moscow = new City();
+    this.tokyo = new City("tokyo");
+    this.paris = new City("paris");
+    this.seattle = new City("seattle"); 
+    this.toronto = new City("toronto");
+    this.baghdad = new City("baghdad");
+    this.beijing = new City("beijing");
+    this.nairobi = new City("nairobi");
+    this.rio = new City("rio");
+    this.la = new City("la");
+    this.moscow = new City("moscow");
     this.isGameOver = false;
-    this.cities = [this.tokyo, this.paris, this.seattle, this.toronto, this.cairo, this.beijing, this.rio,this.la, this.moscow];
+    this.cities = [this.tokyo, this.paris, this.seattle, this.toronto, this.baghdad, this.beijing, this.nairobi, this.rio,this.la, this.moscow];
     this.player = new Player();
-    //this.tokyo.addConnections([this.beijing, this.moscow, this.seattle])
+
+    this.beijing.addConnections([this.moscow, this.baghdad, this.tokyo, this.la]);
+    this.tokyo.addConnections([this.seattle, this.beijing,this.moscow]);
+    this.paris.addConnections([this.moscow, this.toronto, this.baghdad]);
+    this.seattle.addConnections([this.toronto, this.tokyo, this.la]);
+    this.toronto.addConnections([this.seattle, this.paris]);
+    this.baghdad.addConnections([this.beijing, this.nairobi, this.paris]);
+    this.nairobi.addConnections([this.rio, this.baghdad]);
+    this.rio.addConnections([this.la, this.nairobi]);
+    this.la.addConnections([this.beijing, this.seattle, this.rio])
+    this.moscow.addConnections([this.paris, this.beijing, this.tokyo]);
   }
 
   getTotalDiseaseCount(){
