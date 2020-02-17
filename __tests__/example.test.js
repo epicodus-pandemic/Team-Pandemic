@@ -21,7 +21,13 @@ describe("City", () => {
   test(" new player is created with 0 action points", () =>{
     expect (game.player.actionPoints).toEqual(0);
   })
+
+  test(" When game is initated tokyo has name property and holds an array of other cities", () =>{
+    expect (game.tokyo.name).toEqual("tokyo")
+    expect (game.tokyo.connections[1]).toEqual(game.beijing)
+  })
 })
+
 
 
 
