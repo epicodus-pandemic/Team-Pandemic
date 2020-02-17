@@ -2,7 +2,13 @@ import $ from 'jquery';
 import 'bootstrap' ; 
 import 'bootstrap/dist/css/bootstrap.min.css' ; 
 import './styles.css' ;
+import Map from './map.jpg';
 import { Game, Player } from './game';
+
+// Add the image to our existing div.
+const map = new Image();
+map.src = Map;
+$("#mapDiv").append(map);
 
 function checkTime(i) {
   if (i < 10) {

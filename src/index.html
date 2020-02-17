@@ -1,13 +1,103 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>pandemic</title>
+    <title>Team Pandemic</title>
   </head>
   <body>
-    <div class="container">
-      <h1>Pandemic</h1>
-      <p>save the world from disease</p>
-      <button id="startButton">Start!</button>
+    <div class="container-fluid">
+      <div id="pageHeadingDiv">      
+        <h1>Pandemic</h1>
+        <p>save the world from disease</p>
+        <hr>
+      </div>
+      <div class="row" id="gameBoardDiv">
+        <div class="col col-3" id="scoreBoardDiv">
+          <div id="statsDiv">
+            <h4>Game Statistics</h4>
+            <p><span id="currentMonth">February</span> <span id="currentYear">2020</span></p>
+            <table>
+              <thead>
+                <th>City</th>
+                <th>Infection Level</th>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Beijing</td>
+                  <td id="Beijing-disease">0</td>
+                </tr>
+                <tr>
+                  <td>Cairo</td>
+                  <td id="Cairo-disease">0</td>
+                </tr>
+                <tr>
+                  <td>Los Angeles</td>
+                  <td id="LosAngeles-disease">0</td>
+                </tr>
+                <tr>
+                  <td>Moscow</td>
+                  <td id="Moscow-disease">0</td>
+                </tr>
+                <tr>
+                  <td>Paris</td>
+                  <td id="Paris-disease">0</td>
+                </tr>
+                <tr>
+                  <td>Rio de Janeiro </td>
+                  <td id="Rio-disease">0</td>
+                </tr>
+                <tr>
+                  <td>Seattle</td>
+                  <td id="seattle-disease">0</td>
+                </tr>
+                <tr>
+                  <td>Tokyo</td>
+                  <td id="Tokyo-disease">0</td>
+                </tr>
+                <tr>
+                  <td>Toronto</td>
+                  <td id="Toronto-disease">0</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <div id="playerDiv">
+          <h4>Player Statistics</h4>
+          <p>Current Player: <span id="currentPlayer">1</span></p>
+          <table>
+            <thead>
+              <th>Stat</th>
+              <th>Count</th>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Actions Remaining</td>
+                <td id="actionCount">0</td>
+              </tr>
+              <tr>
+                <td>Cure Research Completed</td>
+                <td id="Cairo-disease">0%</td>
+              </tr>
+            </tbody>
+          </table>
+      
+      
+          </div>
+        </div>
+        <div class="col col-9" id="mapDiv">
+        <!-- <img src="./map.jpg" alt="the pandemic map"> -->
+        </div>
+      </div>
+      <div id="gameOverDiv">
+        <h2>Game Over</h2>
+        <div id="winScreen">
+          <h3>You Win!</h3>
+        </div>
+        <div id="loseScreen">
+          <h3>You Lose.</h3>
+        </div>
+      </div>
+
+      <!-- <button id="startButton">Start!</button>
       <button id="devButton">Update!</button>
       <button id="endButton">New Game!</button>
       <button id="Treat">Treat Current City</button>
@@ -27,7 +117,7 @@
       <button id="parisButton">Move to Paris</button>
 
       <p id="tokyo">Cases in Tokyo: <span id="currentDiseaseCount-tokyo">0</span></p>
-      <button id="seattleButton">Move to Tokyo</button>
+      <button id="seattleButton">Move to Tokyo</button> -->
     </div>
   </body>
 </html>
