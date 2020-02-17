@@ -1,5 +1,4 @@
 
-
 export class Player {
   constructor(){
     this.actionPoints = 0;
@@ -16,28 +15,27 @@ export class Player {
       this.actionPoints --;
       city.diseaseCount --;
     }
-  //how to target the city 
-
   }
-
-  // travel(){
-  //   this.actionPoints --
-  //   // how to target city
-  //   // give city a boolean true false if player is present
-  // }
 }
-
-// possible functions add in population and disease counts as a percentage of population. 
+// needs to add in Connections for each city.
 class City {
-  constructor(){
+  constructor(name, connections){
+    this.name = name
     this.diseaseCount = 0;
+    this.connections = connections;
+  }
+  addOneConnection(city){
+    this.connections.push(city)
+    //this.tokyo.addConnection(paris, seattle, )
+  }
+  addConnections(cities){
+    this.connections = cities;
   }
 }
 
-//add in other cities
 export class Game {
   constructor(){
-    this.tokyo = new City();
+    this.tokyo = new City("tokyo", [this.beijing, this.moscow, this.seattle]);
     this.paris = new City();
     this.seattle = new City(); 
     this.toronto = new City();
@@ -49,11 +47,8 @@ export class Game {
     this.isGameOver = false;
     this.cities = [this.tokyo, this.paris, this.seattle, this.toronto, this.cairo, this.beijing, this.rio,this.la, this.moscow];
     this.player = new Player();
+    //this.tokyo.addConnections([this.beijing, this.moscow, this.seattle])
   }
-  //  To check the city number for subtraction needed for decreasing action pts.
-  // let cityDictionary = {}
-  // cityDictionary.put(cityName, cities.Length-1);
-  // cityDictionary.hasKey("Seattle");
 
   getTotalDiseaseCount(){
     let totalDisease = 0;
@@ -62,12 +57,11 @@ export class Game {
     }
     return totalDisease;
   }
-// move away from using index locations in array into using close cities 
+
   setPlayerLocation(cityIndex){
     this.player.currentLocation = cityIndex;
   }
-
-
+// needs work 
   infect(cityIndex){
       console.log("before infect/ disease in seattle: ", this.cities[2].diseaseCount);
     let totalDisease = this.getTotalDiseaseCount();
@@ -82,24 +76,9 @@ export class Game {
           this.cities[i].diseaseCount ++;
         }
       }
-
     } else{
       this.cities[cityIndex].diseaseCount ++;
     }
     console.log("after infect/ disease in seattle: ", this.cities[2].diseaseCount);
   }
-
-
-  // Backend Timers 
-  // setInfectTimer(cityIndex){
-  //   setInterval(() => {
-  //     this.infect(cityIndex);
-  //   }, 12000);
-  // }
-
-  // setMoveTimer(){
-  //   setInterval(() => {
-  //     this.player.setActionPoints();
-  //   }, 6000);
-  // }
 }
