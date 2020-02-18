@@ -5,10 +5,11 @@
     <title>Team Pandemic</title>
   </head>
   <body>
-    <div class="container">
+    <div class="container-fluid">
       <div id="pageHeadingDiv">      
         <h1>Pandemic</h1>
         <p>save the world from disease</p>
+        <button class="btn btn-lg btn-light" id="newGameButton">Start new game!</button>
         <hr>
       </div>
       <div class="row" id="gameBoardDiv">
@@ -62,26 +63,24 @@
             </table>
           </div>
           <div id="playerDiv">
-          <h4>Player Statistics</h4>
-          <p>Current Player: <span id="currentPlayer">1</span></p>
-          <table>
-            <thead>
-              <th>Stat</th>
-              <th>Count</th>
-            </thead>
-            <tbody>
-              <tr>
-                <td>Actions Remaining</td>
-                <td id="actionCount">0</td>
-              </tr>
-              <tr>
-                <td>Cure Research Completed</td>
-                <td id="Cairo-disease">0%</td>
-              </tr>
-            </tbody>
-          </table>
-      
-      
+            <h4>Player Statistics</h4>
+            <p>Current Player: <span id="currentPlayer">1</span></p>
+            <table>
+              <thead>
+                <th>Stat</th>
+                <th>Count</th>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Actions Remaining</td>
+                  <td id="actionCount">0</td>
+                </tr>
+                <tr>
+                  <td>Cure Research Completed</td>
+                  <td id="Cairo-disease">0%</td>
+                </tr>
+              </tbody>
+            </table>
           </div>
         </div>
         <div class="col col-9" id="mapDiv">
@@ -97,28 +96,6 @@
           <h3>You Lose.</h3>
         </div>
       </div>
-
-      <!-- <button id="startButton">Start!</button>
-      <button id="devButton">Update!</button>
-      <button id="endButton">New Game!</button>
-      <button id="Treat">Treat Current City</button>
-      <br>
-      <br>
-      <p>Timer: </p>
-      <div id="timer"></div>
-
-      <p id="actionPoint">Player 1 actions available: <span id="currentActionPoints">0</span></p>
-
-      <p id="location">Player 1 is located in: <span id="currentLocation"></span></p>
-
-      <p id="seattle">Cases in Seattle: <span id="currentDiseaseCount-seattle">0</span></p>      
-      <button id="seattleButton">Move to Seattle</button>
-
-      <p id="paris">Cases in Paris: <span id="currentDiseaseCount-paris">0</span></p>      
-      <button id="parisButton">Move to Paris</button>
-
-      <p id="tokyo">Cases in Tokyo: <span id="currentDiseaseCount-tokyo">0</span></p>
-      <button id="seattleButton">Move to Tokyo</button> -->
     </div>
   </body>
 </html>
