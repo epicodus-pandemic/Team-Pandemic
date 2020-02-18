@@ -17,12 +17,12 @@ export class Player {
     }
   }
 }
-// needs to add in Connections for each city.
+
 class City {
   constructor(name){
     this.name = name
     this.diseaseCount = 0;
-    // this.connections = connections;
+    this.connections = [];
   }
   addConnections(connectedCities){
     this.connections = connectedCities;
@@ -53,7 +53,7 @@ export class Game {
     this.baghdad.addConnections([this.beijing, this.nairobi, this.paris]);
     this.nairobi.addConnections([this.rio, this.baghdad]);
     this.rio.addConnections([this.la, this.nairobi]);
-    this.la.addConnections([this.beijing, this.seattle, this.rio])
+    this.la.addConnections([this.beijing, this.seattle, this.rio])                                                                       
     this.moscow.addConnections([this.paris, this.beijing, this.tokyo]);
   }
 
