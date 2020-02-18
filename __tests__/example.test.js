@@ -61,15 +61,21 @@ describe("City", () => {
     game.player.research();
     game.player.research();
     expect (game.player.reasearchpoints).toEqual(10);
-    game.checkwin();
-    expect (game.isGameOver).toEqual(true);
+    game.checkWin();
+    expect (game.isGameWon).toEqual(true);
   })
   test ("eradicating disease points on the board should fufill win condition", () => {
     game.totalDisease = 0;
     game.increaseInfection();
     game.getTotalDiseaseCount();
-    game.checkwin();
-    expect (game.isGameOver).toEqual(false);
+    game.checkWin();
+    expect (game.isGameWon).toEqual(false);
+  })
+
+  test ("eradicating disease points on the board should fufill win condition", () => {
+    game.totalDisease = 25;
+    game.checkLoss();
+    expect (game.isGameLost).toEqual(true);
   })
 })
 

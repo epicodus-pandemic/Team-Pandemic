@@ -37,7 +37,7 @@ class City {
 
 export class Game {
   constructor(){
-    this.tokyo = new City("tokyo", [this.bangkok, this.moscow, this.seattle]);
+    this.tokyo = new City("tokyo");
     this.paris = new City("paris");
     this.seattle = new City("seattle"); 
     this.toronto = new City("toronto");
@@ -47,7 +47,8 @@ export class Game {
     this.rio = new City("rio");
     this.la = new City("la");
     this.moscow = new City("moscow");
-    this.isGameOver = false;
+    this.isGameWon = false;
+    this.isGameLost = false;
     this.cities = [this.tokyo, this.paris, this.seattle, this.toronto, this.baghdad, this.bangkok, this.nairobi, this.rio,this.la, this.moscow];
     this.player = new Player();
     this.turnCount= 0;
@@ -65,17 +66,25 @@ export class Game {
     this.moscow.addConnections([this.paris, this.bangkok, this.tokyo]);
   }
 
-  checkwin(){
+  checkWin(){
     if(this.player.reasearchpoints ==10 || this.player.totalDisease == 0)
     {
-     return this.isGameOver =true
+     return this.isGameWon=true
+    }
+  }
+
+  checkLoss(){
+    let lossThreshold = this.cities.length * 3;
+    if(this.totalDisease > (lossThreshold * 4)/5)
+    {
+      return this.isGameLost = true
     }
   }
 
   countTurn(){
     this.turnCount ++;
     this.player.setActionPoints();
-    this.checkwin();
+    this.checkWin();
   }
 
   getTotalDiseaseCount(){
