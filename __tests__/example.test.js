@@ -41,7 +41,13 @@ describe("City", () => {
     game.countTurn();
     expect(game.turnCount).toEqual(1)
     expect(game.player.actionPoints).toEqual(4)
-})
+  })
+  test(" Using reasearchpoints() should increase researchpoints by 1 and decrease actions points by one", () =>{
+    game.player.research();
+    expect (game.player.reasearchpoints).toEqual(1);
+    expect (game.player.actionPoints).toEqual(3);
+
+  })
 })
 
 

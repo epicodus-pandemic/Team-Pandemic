@@ -3,6 +3,7 @@ export class Player {
   constructor(){
     this.actionPoints = 4;
     this.currentLocation;
+    this.reasearchpoints = 0;
   }
   setActionPoints(){
     this.actionPoints = 4
@@ -13,9 +14,14 @@ export class Player {
       return false;
     }else{
       this.actionPoints --;
-      city.diseaseCount --;
+      city.diseaseCount --;                     
     }
   }
+
+  research(){
+    this.reasearchpoints += 1;
+    this.actionPoints --;
+  } 
 }
 
 class City {
@@ -94,17 +100,6 @@ export class Game {
     console.log("after infect/ disease in seattle: ", this.cities[2].diseaseCount);
   }
   increaseInfection(){
-    game.toronto.diseaseCount+= 1
-    game.toronto.diseaseCount+= 1
-    game.toronto.diseaseCount+= 1
-    game.toronto.diseaseCount+= 1
-    game.toronto.diseaseCount+= 1
-    game.toronto.diseaseCount+= 1
-    game.toronto.diseaseCount+= 1
-    game.toronto.diseaseCount+= 1
-    game.toronto.diseaseCount+= 1
-    game.toronto.diseaseCount+= 1
-    game.toronto.diseaseCount+= 1
-    game.toronto.diseaseCount+= 1
-    }
+    game.toronto.diseaseCount+= 1;
   }
+}
