@@ -110,6 +110,6 @@ export class Game {
     console.log("after infect/ disease in seattle: ", this.cities[2].diseaseCount);
   }
   increaseInfection(){
-    game.toronto.diseaseCount+= 1;
+    this.toronto.diseaseCount+= 1;
   }
 }
