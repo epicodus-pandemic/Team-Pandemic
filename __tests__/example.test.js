@@ -18,10 +18,6 @@ describe("City", () => {
     expect(game.la.diseaseCount).toEqual(0);
     expect(game.moscow.diseaseCount).toEqual(0);
     })
-  test(" new player is created with 0 action points", () =>{
-    expect (game.player.actionPoints).toEqual(0);
-  })
-
   test(" When game is initated tokyo has name property", () =>{
     expect (game.tokyo.name).toEqual("tokyo");
   })
@@ -37,6 +33,14 @@ describe("City", () => {
     expect (game.la.connections).toEqual([game.beijing, game.seattle, game.rio]);
     expect (game.moscow.connections).toEqual([game.paris, game.beijing, game.tokyo]);
   })
+  test(" new player is created with 4 action points", () =>{
+    expect (game.player.actionPoints).toEqual(4);
+  })
+  test("move count should increase when action points equal zero, and infection increases", ()=>{
+    // game.player.actionPoints = 0
+    game.countTurn();
+    expect(game.turnCount).toEqual(1)
+})
 })
 
 
