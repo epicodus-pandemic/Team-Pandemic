@@ -85,7 +85,7 @@ export class Game {
     this.turnCount ++;
     this.player.setActionPoints();
     this.checkWin();
-    checkLoss();
+    this.checkLoss();
   }
 
   getTotalDiseaseCount(){
@@ -119,6 +119,7 @@ export class Game {
     }
     console.log("after infect/ disease in seattle: ", this.cities[2].diseaseCount);
   }
+  // PlaceHolder increaseInfection 
   increaseInfection(){
     this.toronto.diseaseCount+= 1;
   }
