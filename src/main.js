@@ -10,7 +10,7 @@ var mapboxgl = require('mapbox-gl/dist/mapbox-gl.js');
 mapboxgl.accessToken = 'pk.eyJ1Ijoia3Jpc3RhcnV0eiIsImEiOiJjazZqdWtlbjMwMDFtM2xxcG5zMjlscDJlIn0.XETFmQnM9jiwbDtcAEZfEQ';
 var map = new mapboxgl.Map({
   container: 'mapDiv',
-  style: 'mapbox://styles/kristarutz/ck6r0bnj10oui1irvwnqjyp9u/draft',
+  style: 'mapbox://styles/kristarutz/ck6r0bnj10oui1irvwnqjyp9u',
   zoom: 0.5,
   minZoom: 0.5,
   maxZoom: 5,
