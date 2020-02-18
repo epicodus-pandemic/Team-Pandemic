@@ -19,16 +19,16 @@ export class Player {
   }
 
   research(){
-    this.reasearchpoints += 1;
+    this.reasearchpoints ++;
     this.actionPoints --;
-  } 
+    }
 }
 
 class City {
   constructor(name){
     this.name = name
     this.diseaseCount = 0;
-     this.connections = [];
+    this.connections = [];
   }
   addConnections(connectedCities){
     this.connections = connectedCities;
@@ -37,35 +37,45 @@ class City {
 
 export class Game {
   constructor(){
-    this.tokyo = new City("tokyo", [this.beijing, this.moscow, this.seattle]);
+    this.tokyo = new City("tokyo", [this.bangkok, this.moscow, this.seattle]);
     this.paris = new City("paris");
     this.seattle = new City("seattle"); 
     this.toronto = new City("toronto");
     this.baghdad = new City("baghdad");
-    this.beijing = new City("beijing");
+    this.bangkok = new City("bangkok");
     this.nairobi = new City("nairobi");
     this.rio = new City("rio");
     this.la = new City("la");
     this.moscow = new City("moscow");
     this.isGameOver = false;
-    this.cities = [this.tokyo, this.paris, this.seattle, this.toronto, this.baghdad, this.beijing, this.nairobi, this.rio,this.la, this.moscow];
+    this.cities = [this.tokyo, this.paris, this.seattle, this.toronto, this.baghdad, this.bangkok, this.nairobi, this.rio,this.la, this.moscow];
     this.player = new Player();
     this.turnCount= 0;
+    this.totalDisease = 1;
 
-    this.beijing.addConnections([this.moscow, this.baghdad, this.tokyo, this.la]);
-    this.tokyo.addConnections([this.seattle, this.beijing,this.moscow]);
+    this.bangkok.addConnections([this.moscow, this.baghdad, this.tokyo, this.la]);
+    this.tokyo.addConnections([this.seattle, this.bangkok,this.moscow]);
     this.paris.addConnections([this.moscow, this.toronto, this.baghdad]);
     this.seattle.addConnections([this.toronto, this.tokyo, this.la]);
     this.toronto.addConnections([this.seattle, this.paris]);
-    this.baghdad.addConnections([this.beijing, this.nairobi, this.paris]);
+    this.baghdad.addConnections([this.bangkok, this.nairobi, this.paris]);
     this.nairobi.addConnections([this.rio, this.baghdad]);
     this.rio.addConnections([this.la, this.nairobi]);
-    this.la.addConnections([this.beijing, this.seattle, this.rio])                                                                       
-    this.moscow.addConnections([this.paris, this.beijing, this.tokyo]);
+    this.la.addConnections([this.bangkok, this.seattle, this.rio])                                                                       
+    this.moscow.addConnections([this.paris, this.bangkok, this.tokyo]);
   }
+
+  checkwin(){
+    if(this.player.reasearchpoints ==10 || this.player.totalDisease == 0)
+    {
+     return this.isGameOver =true
+    }
+  }
+
   countTurn(){
     this.turnCount ++;
     this.player.setActionPoints();
+    this.checkwin();
   }
 
   getTotalDiseaseCount(){
