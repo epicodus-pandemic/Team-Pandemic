@@ -13,7 +13,7 @@ describe("City", () => {
     expect(game.toronto.diseaseCount).toEqual(0);
     expect(game.baghdad.diseaseCount).toEqual(0);
     expect(game.nairobi.diseaseCount).toEqual(0);
-    expect(game.beijing.diseaseCount).toEqual(0);
+    expect(game.bangkok.diseaseCount).toEqual(0);
     expect(game.rio.diseaseCount).toEqual(0);
     expect(game.la.diseaseCount).toEqual(0);
     expect(game.moscow.diseaseCount).toEqual(0);
@@ -22,16 +22,16 @@ describe("City", () => {
     expect (game.tokyo.name).toEqual("tokyo");
   })
   test("method addconnections adds other cities to an array within the city class", () =>{
-    expect (game.tokyo.connections).toEqual([game.seattle, game.beijing,game.moscow]);
+    expect (game.tokyo.connections).toEqual([game.seattle, game.bangkok,game.moscow]);
     expect (game.paris.connections).toEqual([game.moscow, game.toronto, game.baghdad]);
     expect (game.seattle.connections).toEqual([game.toronto, game.tokyo, game.la]);
     expect (game.toronto.connections).toEqual([game.seattle, game.paris]);
-    expect (game.baghdad.connections).toEqual([game.beijing, game.nairobi, game.paris]);
+    expect (game.baghdad.connections).toEqual([game.bangkok, game.nairobi, game.paris]);
     expect (game.nairobi.connections).toEqual([game.rio, game.baghdad]);
     expect (game.rio.connections).toEqual([game.la, game.nairobi]);
-    expect (game.beijing.connections).toEqual([game.moscow, game.baghdad, game.tokyo, game.la])
-    expect (game.la.connections).toEqual([game.beijing, game.seattle, game.rio]);
-    expect (game.moscow.connections).toEqual([game.paris, game.beijing, game.tokyo]);
+    expect (game.bangkok.connections).toEqual([game.moscow, game.baghdad, game.tokyo, game.la])
+    expect (game.la.connections).toEqual([game.bangkok, game.seattle, game.rio]);
+    expect (game.moscow.connections).toEqual([game.paris, game.bangkok, game.tokyo]);
   })
   test(" new player is created with 4 action points", () =>{
     expect (game.player.actionPoints).toEqual(4);
@@ -41,7 +41,41 @@ describe("City", () => {
     game.countTurn();
     expect(game.turnCount).toEqual(1)
     expect(game.player.actionPoints).toEqual(4)
-})
+  })
+  test(" Using reasearchpoints() should increase researchpoints by 1 and decrease actions points by one", () =>{
+    game.player.research();
+    expect (game.player.reasearchpoints).toEqual(1);
+    expect (game.player.actionPoints).toEqual(3);
+
+  })
+  test(" reaching ten researchpoints should fufill win condition", () => {
+    game.player.actionPoints = 0;
+    game.player.research();
+    game.player.research();
+    game.player.research();
+    game.player.research();
+    game.player.research();
+    game.player.research();
+    game.player.research();
+    game.player.research();
+    game.player.research();
+    game.player.research();
+    expect (game.player.reasearchpoints).toEqual(10);
+    game.countTurn();
+    expect (game.isGameWon).toEqual(true);
+  })
+  test ("eradicating disease points on the board should fufill win condition", () => {
+    game.totalDisease = 0;
+    game.increaseInfection();
+    game.countTurn();
+    expect (game.isGameWon).toEqual(false);
+  })
+
+  test ("eradicating disease points on the board should fufill win condition", () => {
+    game.totalDisease = 25;
+    game.countTurn();
+    expect (game.isGameLost).toEqual(true);
+  })
 })
 
 
