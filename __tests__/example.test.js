@@ -40,6 +40,7 @@ describe("City", () => {
     // game.player.actionPoints = 0
     game.countTurn();
     expect(game.turnCount).toEqual(1)
+    expect(game.player.actionPoints).toEqual(4)
 })
 })
 

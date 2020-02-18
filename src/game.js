@@ -5,7 +5,7 @@ export class Player {
     this.currentLocation;
   }
   setActionPoints(){
-    this.actionPoints ++
+    this.actionPoints = 4
   }
 
   treat(city){
@@ -58,7 +58,8 @@ export class Game {
     this.moscow.addConnections([this.paris, this.beijing, this.tokyo]);
   }
   countTurn(){
-    this.turnCount ++
+    this.turnCount ++;
+    this.player.setActionPoints();
   }
 
   getTotalDiseaseCount(){
