@@ -66,7 +66,7 @@ describe("City", () => {
   })
   test ("eradicating disease points on the board should fufill win condition", () => {
     game.totalDisease = 0;
-    game.increaseInfection();
+    game.increaseInfection(game.bangkok);
     game.countTurn();
     expect (game.isGameWon).toEqual(false);
   })
@@ -75,6 +75,17 @@ describe("City", () => {
     game.totalDisease = 25;
     game.countTurn();
     expect (game.isGameLost).toEqual(true);
+  })
+
+  test ("shoud infect one city", () => {
+    game.increaseInfection(game.bangkok);
+    expect(game.bangkok.diseaseCount).toEqual(1);
+
+  })
+  test ("should infect surrounding cities", () => {
+    game.infectConnection(game.bangkok);
+    expect(game.la.diseaseCount).toEqual(1);
+
   })
 })
 

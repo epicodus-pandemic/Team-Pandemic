@@ -115,13 +115,20 @@ export class Game {
           this.cities[i].diseaseCount ++;
         }
       }
-    } else{
-      this.cities[cityIndex].diseaseCount ++;
+    } else {
+     increaseInfection(this.cities[cityIndex]);
     }
     console.log("after infect/ disease in seattle: ", this.cities[2].diseaseCount);
   }
   // PlaceHolder increaseInfection 
-  increaseInfection(){
-    this.toronto.diseaseCount+= 1;
+  increaseInfection(cityObj){
+    cityObj.diseaseCount ++;
+  }
+
+  infectConnection(cityObj){
+    for(let i =0; i <cityObj.connections.length; i++){
+    let currentCity = cityObj.connections[i];
+    this.increaseInfection(currentCity);
+    }
   }
 }
