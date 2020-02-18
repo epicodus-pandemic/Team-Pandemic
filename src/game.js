@@ -4,7 +4,7 @@ export class Player {
   constructor(){
     this.actionPoints = 4;
     this.currentLocation;
-    this.reasearchpoints = 0;
+    this.researchPoints = 0;
   }
   setActionPoints(){
     this.actionPoints = 4
@@ -20,7 +20,7 @@ export class Player {
   }
 
   research(){
-    this.reasearchpoints ++;
+    this.researchPoints ++;
     this.actionPoints --;
     }
 }
@@ -68,7 +68,7 @@ export class Game {
   }
 
   checkWin(){
-    if(this.player.reasearchpoints ==10 || this.player.totalDisease == 0)
+    if(this.player.researchPoints ==10 || this.player.totalDisease == 0)
     {
      return this.isGameWon=true
     }
@@ -99,28 +99,17 @@ export class Game {
 
   setPlayerLocation(cityIndex){
     this.player.currentLocation = cityIndex;
+    this.player.actionPoints --;
   }
-// needs work 
-  infect(cityIndex){
-      console.log("before infect/ disease in seattle: ", this.cities[2].diseaseCount);
-    let totalDisease = this.getTotalDiseaseCount();
 
-    if (totalDisease >= (3 * this.cities.length)){
-      console.log("game over");
-      this.isGameOver = true;
-    } else if(this.cities[cityIndex].diseaseCount == 3){ 
-
-      for (let i =0; i < this.cities.length; i++){
-        if (i != cityIndex && this.cities[i].diseaseCount < 3) {
-          this.cities[i].diseaseCount ++;
-        }
-      }
+  infect(cityObj){
+    if(cityObj.diseaseCount == 3){ 
+     this.infectConnection(cityObj);
     } else {
-     increaseInfection(this.cities[cityIndex]);
+      this.increaseInfection(cityObj);
     }
-    console.log("after infect/ disease in seattle: ", this.cities[2].diseaseCount);
   }
-  // PlaceHolder increaseInfection 
+
   increaseInfection(cityObj){
     cityObj.diseaseCount ++;
   }
