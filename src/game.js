@@ -85,6 +85,7 @@ export class Game {
     this.turnCount ++;
     this.player.setActionPoints();
     this.checkWin();
+    checkLoss();
   }
 
   getTotalDiseaseCount(){
