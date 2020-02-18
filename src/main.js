@@ -2,7 +2,25 @@ import $ from 'jquery';
 import 'bootstrap' ; 
 import 'bootstrap/dist/css/bootstrap.min.css' ; 
 import './styles.css' ;
+import Map from './map.jpg';
 import { Game, Player } from './game';
+
+var mapboxgl = require('mapbox-gl/dist/mapbox-gl.js');
+ 
+mapboxgl.accessToken = 'pk.eyJ1Ijoia3Jpc3RhcnV0eiIsImEiOiJjazZqdWtlbjMwMDFtM2xxcG5zMjlscDJlIn0.XETFmQnM9jiwbDtcAEZfEQ';
+var map = new mapboxgl.Map({
+  container: 'mapDiv',
+  style: 'mapbox://styles/kristarutz/ck6r0bnj10oui1irvwnqjyp9u/draft',
+  zoom: 0.5,
+  minZoom: 0.5,
+  maxZoom: 5,
+  center: [-100,35]
+});
+
+// Add the image to our existing div.
+// const map = new Image();
+// map.src = Map;
+// $("#mapDiv").append(map);
 
 function checkTime(i) {
   if (i < 10) {
