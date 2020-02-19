@@ -2,7 +2,6 @@ import $ from 'jquery';
 import 'bootstrap' ; 
 import 'bootstrap/dist/css/bootstrap.min.css' ; 
 import './styles.css' ;
-import Map from './map.jpg';
 import { Game, Player } from './game';
 
 var mapboxgl = require('mapbox-gl/dist/mapbox-gl.js');
@@ -17,14 +16,7 @@ var map = new mapboxgl.Map({
   center: [-100,35]
 });
 
-// Add the image to our existing div.
-// const map = new Image();
-// map.src = Map;
-// $("#mapDiv").append(map);
-
-
-
-let game // = new Game();
+let game;
 
 function updateGameVars(){
   $("#actionCount").text(game.player.actionPoints);
@@ -40,6 +32,7 @@ function updateGameVars(){
 }
 
 function updateControlPanel(){
+  setTravelButtons();
   if (game.player.actionPoints > 0){
     $("#treatBtn").show();
     $("#travelBtn").show();
@@ -49,9 +42,6 @@ function updateControlPanel(){
     $("#travelBtn").hide();
     $("#researchBtn").hide();
   }
-  //if user has action points, then display the buttons with actions they may take
-  //end turn button always stays
-  //the cities that they can travel to are updated to reflect the current city
 }
 
 function checkWin(){
@@ -72,71 +62,68 @@ function checkWin(){
   }
 }
 
+function setTravelButtons(){
+  let currentCity = game.cities[game.player.currentLocation];
+  let innerHTML = "";
+  for (let i = 0; i < currentCity.connections.length; i++){
+    let currentConnection = currentCity.connections[i];
+    let currentConnectionIndex = game.cities.findIndex(currentConnection);
+    console.log(currentConnection.name);
+    innerHTML += `<button class="dropdown-item" id="city-${currentConnectionIndex}-btn">${currentConnection.name}</button>`;
+  }
+  $(`#travelBtns`).text(innerHTML);
+}
+
 $(document).ready(function() {
+  let gamesCount = 0;
     $("#newGameButton").click(function(){ 
+      gamesCount++;
       $("#gameBoardDiv").show();
       $("#gameOverDiv").hide();
       $("#controlPanel").show();
+      
 
-      game = new Game();
-      game.player.currentLocation = 2;
-      // let tokyo = game.tokyo;
-      // let paris = game.paris;
-      // let seattle = game.cities[2];
-      // let toronto = game.toronto;
-      // let baghdad = game.baghdad;
-      // let bankgkok = game.bangkok;
-      // let nairobi = game.nairobi;
-      // let rio = game.rio;
-      // let la = game.la;
-      // let moscow = game.moscow;
+      let player1 = new Player(gamesCount);
+      game = new Game(player1);
+      game.player.currentLocation = Math.floor(Math.random() * 10);
+      game.infectRandom(4);
 
-      //modify "initial infection round"
-      // game.increaseInfection(seattle)
-      // game.increaseInfection(seattle)
-      // game.increaseInfection(seattle)
-      game.infectRandom(6);
-
+      updateControlPanel();
       updateGameVars();
+    })
 
-      // set the display of game board to none and then show in this line
+    $("#treatBtn").click(function(){  
+      game.player.treat(game.cities[game.player.currentLocation]);
+      updateGameVars();
+      updateControlPanel();
+      checkWin();
+    })
 
-      $("#treatBtn").click(function(){  
-        game.player.treat(game.cities[game.player.currentLocation]);
-        updateGameVars();
-        updateControlPanel();
-        checkWin();
-      })
+    $("#travelBtn").click(function(){ 
+      updateGameVars();
+      updateControlPanel();
+    })
 
-      $("#travelBtn").click(function(){ 
-        updateGameVars();
-        updateControlPanel();
-      })
+    $("#researchBtn").click(function(){ 
+      game.player.research();
+      updateControlPanel();
+      checkWin();
+      updateGameVars();        
+    })
 
-      $("#researchBtn").click(function(){ 
-        game.player.research();
-        updateControlPanel();
+    $("#endTurnBtn").click(function(){ 
+      game.endTurn();
+      game.infectRandom(2);
+      updateGameVars();
+      updateControlPanel();
+      checkWin();
+    })
 
-        checkWin();
-        updateGameVars();        
-      })
-
-      $("#endTurnBtn").click(function(){ 
-
-        game.endTurn();
-        // increase the turn count
-        // check win
-        // reset action points
-
-        // COMPUTER ROUND
-        game.infectRandom(2);
-        
-
-        updateGameVars();
-        updateControlPanel();
-        checkWin();
-      })
-
+    $("#la-btn").click(function(){
+      console.log("hi steven");
+    })
+    $("#tokyo-btn").click(function(){
+      console.log("hi ^_^");
     })
 })
 

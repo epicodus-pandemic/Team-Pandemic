@@ -1,10 +1,11 @@
 // this is the branch made on steven's computer at 2:29 PM
 
 export class Player {
-  constructor(){
+  constructor(id){
     this.actionPoints = 4;
     this.currentLocation;
     this.researchPoints = 0;
+    this.id = id;
   }
 
   setActionPoints(num){
@@ -45,7 +46,7 @@ class City {
 }
 
 export class Game {
-  constructor(){
+  constructor(player){
     this.tokyo = new City("Tokyo");
     this.paris = new City("Paris");
     this.seattle = new City("Seattle"); 
@@ -59,7 +60,7 @@ export class Game {
     this.isGameWon = false;
     this.isGameLost = false;
     this.cities = [this.tokyo, this.paris, this.seattle, this.toronto, this.baghdad, this.bangkok, this.nairobi, this.rio, this.la, this.moscow];
-    this.player = new Player();
+    this.player = player;
     this.turnCount= 0;
     this.totalDisease;
 

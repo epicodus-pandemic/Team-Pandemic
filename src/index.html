@@ -5,7 +5,7 @@
     <title>Team Pandemic</title>
   </head>
   <body>
-    <div class="container-fluid">
+    <div class="container">
       <div id="pageHeadingDiv">      
         <h1>Pandemic</h1>
         <p>save the world from disease</p>
@@ -102,7 +102,13 @@
       <div class="control-panel" id="controlPanel">
         <br>
         <button class="btn btn-lg btn-light" id="treatBtn">Treat Infection</button>
-        <button class="btn btn-lg btn-light" id="travelBtn">Travel to a Connecting City</button>
+        <div class="btn-group" role="group">
+          <button class="btn btn-lg btn-light dropdown-toggle" id="travelBtn" data-toggle="dropdown">Travel to a Connecting City</button>
+          <div class="dropdown-menu">
+            <button class="dropdown-item" id="la-btn">Los Angeles</button>
+            <a class="dropdown-item" href="#">Tokyo</a>
+          </div>
+        </div>
         <button class="btn btn-lg btn-light" id="researchBtn">Research for a Cure</button>
         <button class="btn btn-lg btn-light" id="endTurnBtn">End Turn</button>
       </div>
