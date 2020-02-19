@@ -103,7 +103,7 @@ export class Game {
   }
 
   infectRandom(){
-    let randomCityPositionNumber = Math.floor(Math.random() * 11); 
+    let randomCityPositionNumber = Math.floor(Math.random() * 10); 
     let randomCity = this.cities[randomCityPositionNumber];
     this.infect(randomCity);
   }

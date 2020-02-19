@@ -109,9 +109,9 @@ describe("City", () => {
 
   test("Infects a random city", () => {
     game.infectRandom();
+    expect(game.tokyo.diseaseCount).toEqual(0);
     expect(game.paris.diseaseCount).toEqual(0);
     expect(game.seattle.diseaseCount).toEqual(0);
-    expect(game.paris.diseaseCount).toEqual(0);
     expect(game.toronto.diseaseCount).toEqual(0);
     expect(game.baghdad.diseaseCount).toEqual(0);
     expect(game.nairobi.diseaseCount).toEqual(0);
