@@ -6,8 +6,9 @@ export class Player {
     this.currentLocation;
     this.researchPoints = 0;
   }
-  setActionPoints(){
-    this.actionPoints = 4
+
+  setActionPoints(num){
+    this.actionPoints = num;
   }
 
   setLimit(game){
@@ -20,9 +21,7 @@ export class Player {
   }
 
   treat(city){
-    if(this.actionPoints=== 0 || city.diseaseCount === 0){
-      return false;
-    }else{
+    if (city.diseaseCount > 0) {
       this.actionPoints --;
       city.diseaseCount --;                     
     }
@@ -77,9 +76,9 @@ export class Game {
   }
 
   checkWin(){
-    if(this.player.researchPoints ==10 || this.player.totalDisease == 0)
+    if(this.player.researchPoints === 10 || this.totalDisease === 0)
     {
-     return this.isGameWon=true
+      this.isGameWon = true
     }
   }
 
@@ -91,11 +90,10 @@ export class Game {
     }
   }
 
-  countTurn(){
+  endTurn(){
     this.turnCount ++;
-    this.player.setActionPoints();
+    this.player.setActionPoints(4);
     this.checkWin();
-    this.checkLoss();
   }
 
   getTotalDiseaseCount(){
@@ -127,12 +125,13 @@ export class Game {
 
   increaseInfection(cityObj){
     cityObj.diseaseCount ++;
+    this.checkLoss();
   }
 
   infectConnection(cityObj){
     for(let i =0; i <cityObj.connections.length; i++){
-    let currentCity = cityObj.connections[i];
-    this.increaseInfection(currentCity);
+      let currentCity = cityObj.connections[i];
+      this.increaseInfection(currentCity);
     }
   }
 }

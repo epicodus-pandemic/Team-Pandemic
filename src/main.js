@@ -24,10 +24,10 @@ var map = new mapboxgl.Map({
 
 
 
-let game = new Game();
+let game;
 let tokyo = game.tokyo;
 let paris = game.paris;
-let seattle = game.seattle;
+let seattle = game.cities[2];
 let toronto = game.toronto;
 let baghdad = game.baghdad;
 let bankgkok = game.bangkok;
@@ -40,12 +40,46 @@ function updateGameVars(){
   $("#actionCount").text(game.player.actionPoints);
   $("#currentLocation").text(game.cities[game.player.currentLocation].name);
   $("#researchPoints").text(game.player.researchPoints*10 + "%");
-  $("#currentMonth").text("March");
+  $("#currentMonth").text("March"); // use the turn count to generate
   $("#currentYear").text("2021");
 
   for (let i = 0; i < game.cities.length; i++){
     console.log(game.cities[i]);
     $(`#city-${i}-disease`).text(game.cities[i].diseaseCount);
+  }
+
+  for (let i = 0; i < game.cities.length; i++){
+    console.log(game.cities[i].diseaseCount);
+  }
+}
+
+function updateControlPanel(){
+  if (game.player.actionPoints > 0){
+    $("#treatBtn").show();
+    $("#travelBtn").show();
+    $("#researchBtn").show();
+  } else {
+    $("#treatBtn").hide();
+    $("#travelBtn").hide();
+    $("#researchBtn").hide();
+  }
+  //if user has action points, then display the buttons with actions they may take
+  //end turn button always stays
+  //the cities that they can travel to are updated to reflect the current city
+}
+
+function checkWin(){
+  game.checkWin();
+  if (game.isGameWon === true){
+    $("#gameOverDiv").show();
+    $("#winScreen").show();
+    $("#loseScreen").hide();
+    $("#gameBoardDiv").hide();
+
+    $("#treatBtn").hide();
+    $("#travelBtn").hide();
+    $("#researchBtn").hide();
+    $("#endTurnBtn").hide();
   }
 }
 
@@ -53,28 +87,49 @@ $(document).ready(function() {
     $("#newGameButton").click(function(){ 
       game = new Game;
       game.player.currentLocation = 2;
+
+      //modify "initial infection round"
       game.increaseInfection(seattle)
       game.increaseInfection(seattle)
       game.increaseInfection(seattle)
       console.log(seattle);
+
       updateGameVars();
 
       // set the display of game board to none and then show in this line
 
-      $("#treatBtn").click(function(){ 
-        
+      $("#treatBtn").click(function(){  
         game.player.treat(game.cities[game.player.currentLocation]);
         updateGameVars();
+        updateControlPanel();
+        checkWin();
       })
+
       $("#travelBtn").click(function(){ 
         updateGameVars();
+        updateControlPanel();
       })
+
       $("#researchBtn").click(function(){ 
         game.player.research();
-        updateGameVars();
+        updateControlPanel();
+
+        checkWin();
+        updateGameVars();        
       })
+
       $("#endTurnBtn").click(function(){ 
+
+        game.endTurn();
+        // increase the turn count
+        // check win
+        // reset action points
         updateGameVars();
+        updateControlPanel();
+
+        // COMPUTER ROUND
+        // infect cities... 
+        // check loss
       })
 
     })
