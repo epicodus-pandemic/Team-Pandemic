@@ -1,13 +1,15 @@
 // this is the branch made on steven's computer at 2:29 PM
 
 export class Player {
-  constructor(){
+  constructor(id){
     this.actionPoints = 4;
     this.currentLocation;
     this.researchPoints = 0;
+    this.id = id;
   }
-  setActionPoints(){
-    this.actionPoints = 4
+
+  setActionPoints(num){
+    this.actionPoints = num;
   }
 
   setLimit(game){
@@ -20,9 +22,7 @@ export class Player {
   }
 
   treat(city){
-    if(this.actionPoints=== 0 || city.diseaseCount === 0){
-      return false;
-    }else{
+    if (city.diseaseCount > 0) {
       this.actionPoints --;
       city.diseaseCount --;                     
     }
@@ -46,23 +46,23 @@ class City {
 }
 
 export class Game {
-  constructor(){
-    this.tokyo = new City("tokyo");
-    this.paris = new City("paris");
-    this.seattle = new City("seattle"); 
-    this.toronto = new City("toronto");
-    this.baghdad = new City("baghdad");
-    this.bangkok = new City("bangkok");
-    this.nairobi = new City("nairobi");
-    this.rio = new City("rio");
-    this.la = new City("la");
-    this.moscow = new City("moscow");
+  constructor(player){
+    this.tokyo = new City("Tokyo");
+    this.paris = new City("Paris");
+    this.seattle = new City("Seattle"); 
+    this.toronto = new City("Toronto");
+    this.baghdad = new City("Baghdad");
+    this.bangkok = new City("Bangkok");
+    this.nairobi = new City("Nairobi");
+    this.rio = new City("Rio de Janeiro");
+    this.la = new City("Los Angeles");
+    this.moscow = new City("Moscow");
     this.isGameWon = false;
     this.isGameLost = false;
     this.cities = [this.tokyo, this.paris, this.seattle, this.toronto, this.baghdad, this.bangkok, this.nairobi, this.rio, this.la, this.moscow];
-    this.player = new Player();
+    this.player = player;
     this.turnCount= 0;
-    this.totalDisease = 1;
+    this.totalDisease;
 
     this.bangkok.addConnections([this.moscow, this.baghdad, this.tokyo, this.la]);
     this.tokyo.addConnections([this.seattle, this.bangkok,this.moscow]);
@@ -77,25 +77,26 @@ export class Game {
   }
 
   checkWin(){
-    if(this.player.researchPoints ==10 || this.player.totalDisease == 0)
+    //console.log("research points at ", this.player.researchPoints);
+    //console.log("disease points at ", this.totalDisease);
+    if(this.player.researchPoints === 10 || this.getTotalDiseaseCount() === 0)
     {
-     return this.isGameWon=true
+      this.isGameWon = true
     }
   }
 
   checkLoss(){
     let lossThreshold = this.cities.length * 3;
-    if(this.totalDisease > (lossThreshold * 4)/5)
+    if(this.getTotalDiseaseCount() > (lossThreshold * 4)/5)
     {
       return this.isGameLost = true
     }
   }
 
-  countTurn(){
+  endTurn(){
     this.turnCount ++;
-    this.player.setActionPoints();
+    this.player.setActionPoints(4);
     this.checkWin();
-    this.checkLoss();
   }
 
   getTotalDiseaseCount(){
@@ -111,13 +112,16 @@ export class Game {
     this.player.actionPoints --;
   }
 
-  infectRandom(){
-    let randomCityPositionNumber = Math.floor(Math.random() * 10); 
-    let randomCity = this.cities[randomCityPositionNumber];
-    this.infect(randomCity);
+  infectRandom(num){
+    for (let i = 0; i < num; i++){
+      let randomCityPositionNumber = Math.floor(Math.random() * 10); 
+      let randomCity = this.cities[randomCityPositionNumber];
+      this.infect(randomCity);
+    }
   }
 
   infect(cityObj){
+    console.log("attempt to hit: ",cityObj.name);
     if(cityObj.diseaseCount == 3){ 
      this.infectConnection(cityObj);
     } else {
@@ -126,13 +130,17 @@ export class Game {
   }
 
   increaseInfection(cityObj){
-    cityObj.diseaseCount ++;
+    if(cityObj.diseaseCount < 3){
+      console.log("increase disease",cityObj.name);
+      cityObj.diseaseCount ++;
+      this.checkLoss();
+    }
   }
 
   infectConnection(cityObj){
     for(let i =0; i <cityObj.connections.length; i++){
-    let currentCity = cityObj.connections[i];
-    this.increaseInfection(currentCity);
+      let currentCity = cityObj.connections[i];
+      this.increaseInfection(currentCity);
     }
   }
 }
