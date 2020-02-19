@@ -43,8 +43,8 @@ function updateGameVars(){
   $("#currentMonth").text("March");
   $("#currentYear").text("2021");
 
-  $("#beijing").text(game.cities[2].diseaseCount);
   for (let i = 0; i < game.cities.length; i++){
+    console.log(game.cities[i]);
     $(`#city-${i}-disease`).text(game.cities[i].diseaseCount);
   }
 }
@@ -52,18 +52,25 @@ function updateGameVars(){
 $(document).ready(function() {
     $("#newGameButton").click(function(){ 
       game = new Game;
-      game.setPlayerLocation(2);
+      game.player.currentLocation = 2;
+      game.increaseInfection(seattle)
+      game.increaseInfection(seattle)
+      game.increaseInfection(seattle)
+      console.log(seattle);
       updateGameVars();
 
       // set the display of game board to none and then show in this line
 
       $("#treatBtn").click(function(){ 
+        
+        game.player.treat(game.cities[game.player.currentLocation]);
         updateGameVars();
       })
       $("#travelBtn").click(function(){ 
         updateGameVars();
       })
       $("#researchBtn").click(function(){ 
+        game.player.research();
         updateGameVars();
       })
       $("#endTurnBtn").click(function(){ 
