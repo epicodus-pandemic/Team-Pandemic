@@ -10,6 +10,15 @@ export class Player {
     this.actionPoints = 4
   }
 
+  setLimit(game){
+    if(this.actionPoints <= 0){
+      this.actionPoints = 0;
+    } if( this.researchPoints >= 10){
+      this.researchPoints = 10;
+      game.isGameWon = true;
+    }
+  }
+
   treat(city){
     if(this.actionPoints=== 0 || city.diseaseCount === 0){
       return false;
