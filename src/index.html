@@ -5,12 +5,40 @@
     <title>Team Pandemic</title>
   </head>
   <body>
-    <div class="container-fluid">
+    <div class="container">
       <div id="pageHeadingDiv">      
         <h1>Pandemic</h1>
         <p>save the world from disease</p>
         <button class="btn btn-lg btn-light" id="newGameButton">Start new game!</button>
+        <button class="btn btn-lg btn-light" id="tutorialButton">Read a tutorial!</button>
         <hr>
+      </div>
+      <div id="tutorialIsland">
+        <div>
+          <h1 class="header">Pandemic Tutorial</h1>
+          <p class="word"> Thank you so much for choosing to play our own take on the pandemic game. Now before you play, you might want to read this tutorial</p>
+        </div>
+        <div class="border">
+          <div>
+            <p class="word">To begin, Pandemic is a strategy game where you are trying to rid the world of a deadly outbreak of a disease. You can travel throughout the world and conduct research on a cure for the disease. Once you develop a cure, you win the game. If you fail to develop a cure and the disease grows too much. You will lose the game.</p>
+          </div> 
+          <h2>Rules and Gameplay:</h2>
+          <ul>
+            <li>Player begins with 4 action points to spend. The player can spend these points by travelling to a differenct city, treating the disease, or conducting research.</li>
+            <br>
+            <li>To win the game, you must develop a cure and eradicate the disease.</li>
+            <br>
+            <li>If the infected population maxes out, you will lose the game.</li>
+            <br>
+            <li>When the game starts, 3 cities in the world will be automatically infected.</li>
+            <br>
+            <li>You have the option to skip your turn and restore your action points.</li>
+          </ul>
+          <p class="word">Once again, We here at Epicodus games thank you for choosing to play our game. We worked hard on this game and we believe that it is the greatest game of the new decade. Enjoy Pandemic!!!!!!
+          </p>
+        </div>
+        <br>
+        <img src="https://www.labelmaster.com/product/image/medium/h-bbl6_0.png" alt="">
       </div>
       <div class="row" id="gameBoardDiv">
         <div class="col col-2" id="scoreBoardDiv">
@@ -63,6 +91,10 @@
                   <td>Toronto</td>
                   <td id="city-3-disease">0</td>
                 </tr>
+                <tr>
+                  <td>Total Disease</td>
+                  <td id="total-disease">0</td>
+                </tr>
               </tbody>
             </table>
           </div>
@@ -92,13 +124,26 @@
           </div>
         </div>
         <div class="col col-10" id="mapDiv">
-        <!-- <img src="./map.jpg" alt="the pandemic map"> -->
         </div>
       </div>
       <div class="control-panel" id="controlPanel">
         <br>
         <button class="btn btn-lg btn-light" id="treatBtn">Treat Infection</button>
-        <button class="btn btn-lg btn-light" id="travelBtn">Travel to a Connecting City</button>
+        <div class="btn-group" role="group">
+          <button class="btn btn-lg btn-light dropdown-toggle" id="travelBtn" data-toggle="dropdown">Travel to a Connecting City</button>
+          <div id="travelBtns" class="dropdown-menu">
+            <button class="dropdown-item" id="city-0-btn">Tokyo</button>
+            <button class="dropdown-item" id="city-1-btn">Paris</button>
+            <button class="dropdown-item" id="city-2-btn">Seattle</button>
+            <button class="dropdown-item" id="city-3-btn">Toronto</button>
+            <button class="dropdown-item" id="city-4-btn">Baghdad</button>
+            <button class="dropdown-item" id="city-5-btn">Bangkok</button>
+            <button class="dropdown-item" id="city-6-btn">Nairobi</button>
+            <button class="dropdown-item" id="city-7-btn">Rio de Janeiro</button>
+            <button class="dropdown-item" id="city-8-btn">Los Angeles</button>
+            <button class="dropdown-item" id="city-9-btn">Moscow</button>
+          </div>
+        </div>
         <button class="btn btn-lg btn-light" id="researchBtn">Research for a Cure</button>
         <button class="btn btn-lg btn-light" id="endTurnBtn">End Turn</button>
       </div>

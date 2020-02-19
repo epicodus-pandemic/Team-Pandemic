@@ -1,19 +1,19 @@
 // this is the branch made on steven's computer at 2:29 PM
 
 export class Player {
-  constructor(){
+  constructor(id){
     this.actionPoints = 4;
     this.currentLocation;
     this.researchPoints = 0;
+    this.id = id;
   }
-  setActionPoints(){
-    this.actionPoints = 4
+
+  setActionPoints(num){
+    this.actionPoints = num;
   }
 
   treat(city){
-    if(this.actionPoints=== 0 || city.diseaseCount === 0){
-      return false;
-    }else{
+    if (city.diseaseCount > 0) {
       this.actionPoints --;
       city.diseaseCount --;                     
     }
@@ -22,12 +22,12 @@ export class Player {
   research(){
     this.researchPoints ++;
     this.actionPoints --;
-    }
+  }
 }
 
 class City {
   constructor(name){
-    this.name = name
+    this.name = name;
     this.diseaseCount = 0;
     this.connections = [];
   }
@@ -37,23 +37,23 @@ class City {
 }
 
 export class Game {
-  constructor(){
-    this.tokyo = new City("tokyo");
-    this.paris = new City("paris");
-    this.seattle = new City("seattle"); 
-    this.toronto = new City("toronto");
-    this.baghdad = new City("baghdad");
-    this.bangkok = new City("bangkok");
-    this.nairobi = new City("nairobi");
-    this.rio = new City("rio");
-    this.la = new City("la");
-    this.moscow = new City("moscow");
+  constructor(player){
+    this.tokyo = new City("Tokyo");
+    this.paris = new City("Paris");
+    this.seattle = new City("Seattle"); 
+    this.toronto = new City("Toronto");
+    this.baghdad = new City("Baghdad");
+    this.bangkok = new City("Bangkok");
+    this.nairobi = new City("Nairobi");
+    this.rio = new City("Rio de Janeiro");
+    this.la = new City("Los Angeles");
+    this.moscow = new City("Moscow");
     this.isGameWon = false;
     this.isGameLost = false;
     this.cities = [this.tokyo, this.paris, this.seattle, this.toronto, this.baghdad, this.bangkok, this.nairobi, this.rio, this.la, this.moscow];
-    this.player = new Player();
+    this.player = player;
     this.turnCount= 0;
-    this.totalDisease = 1;
+    this.totalDisease;
 
     this.bangkok.addConnections([this.moscow, this.baghdad, this.tokyo, this.la]);
     this.tokyo.addConnections([this.seattle, this.bangkok,this.moscow]);
@@ -63,30 +63,31 @@ export class Game {
     this.baghdad.addConnections([this.bangkok, this.nairobi, this.paris]);
     this.nairobi.addConnections([this.rio, this.baghdad]);
     this.rio.addConnections([this.la, this.nairobi]);
-    this.la.addConnections([this.bangkok, this.seattle, this.rio])                                                                       
+    this.la.addConnections([this.bangkok, this.seattle, this.rio]);
     this.moscow.addConnections([this.paris, this.bangkok, this.tokyo]);
   }
 
   checkWin(){
-    if(this.player.researchPoints ==10 || this.player.totalDisease == 0)
+    //console.log("research points at ", this.player.researchPoints);
+    //console.log("disease points at ", this.totalDisease);
+    if(this.player.researchPoints === 20 || this.getTotalDiseaseCount() === 0)
     {
-     return this.isGameWon=true
+      this.isGameWon = true;
     }
   }
 
   checkLoss(){
     let lossThreshold = this.cities.length * 3;
-    if(this.totalDisease > (lossThreshold * 4)/5)
+    if(this.getTotalDiseaseCount() > (lossThreshold * 2)/3)
     {
-      return this.isGameLost = true
+      return this.isGameLost = true;
     }
   }
 
-  countTurn(){
+  endTurn(){
     this.turnCount ++;
-    this.player.setActionPoints();
+    this.player.setActionPoints(4);
     this.checkWin();
-    this.checkLoss();
   }
 
   getTotalDiseaseCount(){
@@ -102,28 +103,33 @@ export class Game {
     this.player.actionPoints --;
   }
 
-  infectRandom(){
-    let randomCityPositionNumber = Math.floor(Math.random() * 10); 
-    let randomCity = this.cities[randomCityPositionNumber];
-    this.infect(randomCity);
+  infectRandom(num){
+    for (let i = 0; i < num; i++){
+      let randomCityPositionNumber = Math.floor(Math.random() * 10); 
+      let randomCity = this.cities[randomCityPositionNumber];
+      this.infect(randomCity);
+    }
   }
 
   infect(cityObj){
     if(cityObj.diseaseCount == 3){ 
-     this.infectConnection(cityObj);
+      this.infectConnection(cityObj);
     } else {
       this.increaseInfection(cityObj);
     }
   }
 
   increaseInfection(cityObj){
-    cityObj.diseaseCount ++;
+    if(cityObj.diseaseCount < 3){
+      cityObj.diseaseCount ++;
+      this.checkLoss();
+    }
   }
 
   infectConnection(cityObj){
     for(let i =0; i <cityObj.connections.length; i++){
-    let currentCity = cityObj.connections[i];
-    this.increaseInfection(currentCity);
+      let currentCity = cityObj.connections[i];
+      this.increaseInfection(currentCity);
     }
   }
 }
