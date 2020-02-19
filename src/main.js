@@ -10,7 +10,7 @@ var mapboxgl = require('mapbox-gl/dist/mapbox-gl.js');
 mapboxgl.accessToken = 'pk.eyJ1Ijoia3Jpc3RhcnV0eiIsImEiOiJjazZqdWtlbjMwMDFtM2xxcG5zMjlscDJlIn0.XETFmQnM9jiwbDtcAEZfEQ';
 var map = new mapboxgl.Map({
   container: 'mapDiv',
-  style: 'mapbox://styles/kristarutz/ck6r0bnj10oui1irvwnqjyp9u/draft',
+  style: 'mapbox://styles/kristarutz/ck6r0bnj10oui1irvwnqjyp9u',
   zoom: 0.5,
   minZoom: 0.5,
   maxZoom: 5,
@@ -22,51 +22,61 @@ var map = new mapboxgl.Map({
 // map.src = Map;
 // $("#mapDiv").append(map);
 
-function checkTime(i) {
-  if (i < 10) {
-      i = "0" + i
-    }  // add zero in front of numbers < 10
-  return i;
-}
 
- let game = new Game();
+
+let game = new Game();
+let tokyo = game.tokyo;
+let paris = game.paris;
+let seattle = game.seattle;
+let toronto = game.toronto;
+let baghdad = game.baghdad;
+let bankgkok = game.bangkok;
+let nairobi = game.nairobi;
+let rio = game.rio;
+let la = game.la;
+let moscow = game.moscow;
 
 function updateGameVars(){
-  setInterval(() => {
-    console.log("UPDATE GAME VARS CALLED");
-    $("#currentActionPoints").text(game.player.actionPoints);
-    $("#currentLocation").text(game.player.currentLocation);
-    $("#currentDiseaseCount-tokyo").text(game.cities[0].diseaseCount);
-    $("#currentDiseaseCount-paris").text(game.cities[1].diseaseCount);
-    $("#currentDiseaseCount-seattle").text(game.cities[2].diseaseCount);
-  }, 2000);
+  $("#actionCount").text(game.player.actionPoints);
+  $("#currentLocation").text(game.cities[game.player.currentLocation].name);
+  $("#researchPoints").text(game.player.researchPoints*10 + "%");
+  $("#currentMonth").text("March");
+  $("#currentYear").text("2021");
+
+  for (let i = 0; i < game.cities.length; i++){
+    console.log(game.cities[i]);
+    $(`#city-${i}-disease`).text(game.cities[i].diseaseCount);
+  }
 }
 
 $(document).ready(function() {
-
-    $("#startButton").click(function(){ 
-      console.log("start") 
+    $("#newGameButton").click(function(){ 
       game = new Game;
-      game.setPlayerLocation(2);
-
-      console.log("player actions: ", game.player.actionPoints);
-      console.log("disease in seattle: ", game.cities[2].diseaseCount);
-      game.setMoveTimer();
-      game.setInfectTimer(2);
-      game.player.setActionPoints();
-      game.infect(1);
+      game.player.currentLocation = 2;
+      game.increaseInfection(seattle)
+      game.increaseInfection(seattle)
+      game.increaseInfection(seattle)
+      console.log(seattle);
       updateGameVars();
-    })
 
-    $("#devButton").click(function(){ 
-      console.log("dev") 
-      // game.player.setActionPoints();
-      // game.infect(1);
-      updateGameVars();
-    })
+      // set the display of game board to none and then show in this line
 
-    $("#endButton").click(function() {
-        //clearInterval(timer);
+      $("#treatBtn").click(function(){ 
+        
+        game.player.treat(game.cities[game.player.currentLocation]);
+        updateGameVars();
+      })
+      $("#travelBtn").click(function(){ 
+        updateGameVars();
+      })
+      $("#researchBtn").click(function(){ 
+        game.player.research();
+        updateGameVars();
+      })
+      $("#endTurnBtn").click(function(){ 
+        updateGameVars();
+      })
+
     })
 })
 

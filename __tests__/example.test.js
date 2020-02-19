@@ -42,9 +42,9 @@ describe("City", () => {
     expect(game.turnCount).toEqual(1)
     expect(game.player.actionPoints).toEqual(4)
   })
-  test(" Using reasearchpoints() should increase researchpoints by 1 and decrease actions points by one", () =>{
+  test(" Using researchPoints() should increase researchpoints by 1 and decrease actions points by one", () =>{
     game.player.research();
-    expect (game.player.reasearchpoints).toEqual(1);
+    expect (game.player.researchPoints).toEqual(1);
     expect (game.player.actionPoints).toEqual(3);
 
   })
@@ -60,13 +60,13 @@ describe("City", () => {
     game.player.research();
     game.player.research();
     game.player.research();
-    expect (game.player.reasearchpoints).toEqual(10);
+    expect (game.player.researchPoints).toEqual(10);
     game.countTurn();
     expect (game.isGameWon).toEqual(true);
   })
   test ("eradicating disease points on the board should fufill win condition", () => {
     game.totalDisease = 0;
-    game.increaseInfection();
+    game.increaseInfection(game.bangkok);
     game.countTurn();
     expect (game.isGameWon).toEqual(false);
   })
@@ -76,7 +76,52 @@ describe("City", () => {
     game.countTurn();
     expect (game.isGameLost).toEqual(true);
   })
+
+  test ("shoud infect one city", () => {
+    game.increaseInfection(game.bangkok);
+    expect(game.bangkok.diseaseCount).toEqual(1);
+
+  })
+  test ("should infect surrounding cities", () => {
+    game.infectConnection(game.bangkok);
+    expect(game.la.diseaseCount).toEqual(1);
+  })
+
+  test (" should not infect connected cities when disease count is less than 3", () => {
+    game.tokyo.diseaseCount =1
+    game.infect(game.tokyo);
+    expect(game.tokyo.diseaseCount).toEqual(2);
+    expect(game.seattle.diseaseCount).toEqual(0);
+  })
+  test (" should infect all connected cities when disease count in the city is less than three", () => {
+    game.tokyo.diseaseCount = 3
+    game.infect(game.tokyo);
+    expect(game.tokyo.diseaseCount).toEqual(3);
+    expect(game.seattle.diseaseCount).toEqual(1);
+  })
+
+  test(" Player location should be tokyo at index 0, and action points should be decreased by 1", () => {
+    game.player.actionPoints = 4;
+    game.setPlayerLocation(game.tokyo);
+    expect(game.player.currentLocation).toEqual(game.tokyo);
+    expect(game.player.actionPoints).toEqual(3);
+  })
+
+  test("Infects a random city should fail", () => {
+    game.infectRandom();
+    expect(game.tokyo.diseaseCount).toEqual(0);
+    expect(game.paris.diseaseCount).toEqual(0);
+    expect(game.seattle.diseaseCount).toEqual(0);
+    expect(game.toronto.diseaseCount).toEqual(0);
+    expect(game.baghdad.diseaseCount).toEqual(0);
+    expect(game.nairobi.diseaseCount).toEqual(0);
+    expect(game.bangkok.diseaseCount).toEqual(0);
+    expect(game.rio.diseaseCount).toEqual(0);
+    expect(game.la.diseaseCount).toEqual(0);
+    expect(game.moscow.diseaseCount).toEqual(0);
+  })
 })
+
 
 
 

@@ -1,9 +1,10 @@
+// this is the branch made on steven's computer at 2:29 PM
 
 export class Player {
   constructor(){
     this.actionPoints = 4;
     this.currentLocation;
-    this.reasearchpoints = 0;
+    this.researchPoints = 0;
   }
   setActionPoints(){
     this.actionPoints = 4
@@ -19,7 +20,7 @@ export class Player {
   }
 
   research(){
-    this.reasearchpoints ++;
+    this.researchPoints ++;
     this.actionPoints --;
     }
 }
@@ -49,7 +50,7 @@ export class Game {
     this.moscow = new City("moscow");
     this.isGameWon = false;
     this.isGameLost = false;
-    this.cities = [this.tokyo, this.paris, this.seattle, this.toronto, this.baghdad, this.bangkok, this.nairobi, this.rio,this.la, this.moscow];
+    this.cities = [this.tokyo, this.paris, this.seattle, this.toronto, this.baghdad, this.bangkok, this.nairobi, this.rio, this.la, this.moscow];
     this.player = new Player();
     this.turnCount= 0;
     this.totalDisease = 1;
@@ -67,7 +68,7 @@ export class Game {
   }
 
   checkWin(){
-    if(this.player.reasearchpoints ==10 || this.player.totalDisease == 0)
+    if(this.player.researchPoints ==10 || this.player.totalDisease == 0)
     {
      return this.isGameWon=true
     }
@@ -98,29 +99,31 @@ export class Game {
 
   setPlayerLocation(cityIndex){
     this.player.currentLocation = cityIndex;
+    this.player.actionPoints --;
   }
-// needs work 
-  infect(cityIndex){
-      console.log("before infect/ disease in seattle: ", this.cities[2].diseaseCount);
-    let totalDisease = this.getTotalDiseaseCount();
 
-    if (totalDisease >= (3 * this.cities.length)){
-      console.log("game over");
-      this.isGameOver = true;
-    } else if(this.cities[cityIndex].diseaseCount == 3){ 
+  infectRandom(){
+    let randomCityPositionNumber = Math.floor(Math.random() * 10); 
+    let randomCity = this.cities[randomCityPositionNumber];
+    this.infect(randomCity);
+  }
 
-      for (let i =0; i < this.cities.length; i++){
-        if (i != cityIndex && this.cities[i].diseaseCount < 3) {
-          this.cities[i].diseaseCount ++;
-        }
-      }
-    } else{
-      this.cities[cityIndex].diseaseCount ++;
+  infect(cityObj){
+    if(cityObj.diseaseCount == 3){ 
+     this.infectConnection(cityObj);
+    } else {
+      this.increaseInfection(cityObj);
     }
-    console.log("after infect/ disease in seattle: ", this.cities[2].diseaseCount);
   }
-  // PlaceHolder increaseInfection 
-  increaseInfection(){
-    this.toronto.diseaseCount+= 1;
+
+  increaseInfection(cityObj){
+    cityObj.diseaseCount ++;
+  }
+
+  infectConnection(cityObj){
+    for(let i =0; i <cityObj.connections.length; i++){
+    let currentCity = cityObj.connections[i];
+    this.increaseInfection(currentCity);
+    }
   }
 }

@@ -1,0 +1,487 @@
+{
+  "features": [
+    {
+      "type": "Feature",
+      "properties": {
+        "type": "connection"
+      },
+      "geometry": {
+        "coordinates": [
+          [
+            [
+              -122.3301,
+              47.6038
+            ],
+            [
+              -180,
+              40
+            ]
+          ],
+          [
+            [
+              180,
+              40
+            ],
+            [
+              139.77,
+              35.68
+            ]
+          ]
+        ],
+        "type": "MultiLineString"
+      },
+      "id": "004e864340c6a87a1a6f0ac247635137"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "type": "connection"
+      },
+      "geometry": {
+        "coordinates": [
+          [
+            -122.3301,
+            47.6038
+          ],
+          [
+            -118.2439,
+            34.0544
+          ]
+        ],
+        "type": "LineString"
+      },
+      "id": "05df049d57b686379e55c2a3858f1ba5"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "type": "connection"
+      },
+      "geometry": {
+        "coordinates": [
+          [
+            37.61778,
+            55.75583
+          ],
+          [
+            100.51667,
+            13.75
+          ]
+        ],
+        "type": "LineString"
+      },
+      "id": "1735e5fa112f9a23fe69d323d2efbf2a"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "type": "connection"
+      },
+      "geometry": {
+        "coordinates": [
+          [
+            2.35183,
+            48.85658
+          ],
+          [
+            37.61778,
+            55.75583
+          ]
+        ],
+        "type": "LineString"
+      },
+      "id": "20817ac27ded94a86c13236a9457fddb"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "type": "connection"
+      },
+      "geometry": {
+        "coordinates": [
+          [
+            44.41667,
+            33.35
+          ],
+          [
+            36.81667,
+            -1.28333
+          ]
+        ],
+        "type": "LineString"
+      },
+      "id": "343c2f9487a4bebf46516c684698e1d5"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "type": "connection"
+      },
+      "geometry": {
+        "coordinates": [
+          [
+            36.81667,
+            -1.28333
+          ],
+          [
+            -43.2094,
+            -22.911
+          ]
+        ],
+        "type": "LineString"
+      },
+      "id": "477cefd54621641d89eb297759c0d629"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "type": "connection"
+      },
+      "geometry": {
+        "coordinates": [
+          [
+            -79.3849,
+            43.6529
+          ],
+          [
+            2.35183,
+            48.85658
+          ]
+        ],
+        "type": "LineString"
+      },
+      "id": "4c30066ce74283d637a1fdbfec119dc0"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "type": "connection"
+      },
+      "geometry": {
+        "coordinates": [
+          [
+            2.35183,
+            48.85658
+          ],
+          [
+            44.41667,
+            33.35
+          ]
+        ],
+        "type": "LineString"
+      },
+      "id": "73cb9e0ee6cff98e351552ee50d0c5b4"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "type": "connection"
+      },
+      "geometry": {
+        "coordinates": [
+          [
+            [
+              -118.2439,
+              34.0544
+            ],
+            [
+              -180,
+              25
+            ]
+          ],
+          [
+            [
+              180,
+              25
+            ],
+            [
+              100.51667,
+              13.75
+            ]
+          ]
+        ],
+        "type": "MultiLineString"
+      },
+      "id": "a00365438edce8abb34aff735b775bd1"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "type": "connection"
+      },
+      "geometry": {
+        "coordinates": [
+          [
+            -118.2439,
+            34.0544
+          ],
+          [
+            -43.2094,
+            -22.911
+          ]
+        ],
+        "type": "LineString"
+      },
+      "id": "ad673d92039020d4e458497097215ce5"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "type": "connection"
+      },
+      "geometry": {
+        "coordinates": [
+          [
+            -122.3301,
+            47.6038
+          ],
+          [
+            -79.3849,
+            43.6529
+          ]
+        ],
+        "type": "LineString"
+      },
+      "id": "af0d11fffd472e28d3418bfc28f10ea6"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "type": "connection"
+      },
+      "geometry": {
+        "coordinates": [
+          [
+            100.51667,
+            13.75
+          ],
+          [
+            139.77,
+            35.68
+          ]
+        ],
+        "type": "LineString"
+      },
+      "id": "b3623493dad0b59168428288bd64b0bf"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "type": "connection"
+      },
+      "geometry": {
+        "coordinates": [
+          [
+            37.61778,
+            55.75583
+          ],
+          [
+            139.77,
+            35.68
+          ]
+        ],
+        "type": "LineString"
+      },
+      "id": "bc3c8152f7b3d0534b4431fc4b435ace"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "type": "connection"
+      },
+      "geometry": {
+        "coordinates": [
+          [
+            44.41667,
+            33.35
+          ],
+          [
+            100.51667,
+            13.75
+          ]
+        ],
+        "type": "LineString"
+      },
+      "id": "d9a8fd320a02cb8591654b2ec3f8ced7"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "wikidata": "Q5083",
+        "place_name": "Seattle, Washington, United States",
+        "type": "city",
+        "infection_level": 0
+      },
+      "geometry": {
+        "coordinates": [
+          -122.3301,
+          47.6038
+        ],
+        "type": "Point"
+      },
+      "id": "place.11115494111229470"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "wikidata": "Q3870",
+        "place_name": "Nairobi, Kenya",
+        "type": "city",
+        "infection_level": 0,
+        "research_station": "false",
+        "player": "Player 1",
+        "title": "Nairobi",
+        "description": "<strong>Make it Mount Pleasant</strong><p><a href=\"http://www.mtpleasantdc.com/makeitmtpleasant\" target=\"_blank\" title=\"Opens in a new window\">Make it Mount Pleasant</a> is a handmade and vintage market and afternoon of live entertainment and kids activities. 12:00-6:00 p.m.</p>"
+      },
+      "geometry": {
+        "coordinates": [
+          36.81667,
+          -1.28333
+        ],
+        "type": "Point"
+      },
+      "id": "place.11775991023601280"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "wikidata": "Q1861",
+        "place_name": "Bangkok, Bangkok Metropolis, Thailand",
+        "type": "city",
+        "infection_level": 0
+      },
+      "geometry": {
+        "coordinates": [
+          100.51667,
+          13.75
+        ],
+        "type": "Point"
+      },
+      "id": "place.12180547005527470"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "short_code": "FR-75",
+        "wikidata": "Q90",
+        "place_name": "Paris, France",
+        "type": "city",
+        "infection_level": 0
+      },
+      "geometry": {
+        "coordinates": [
+          2.35183,
+          48.85658
+        ],
+        "type": "Point"
+      },
+      "id": "place.12421817726497330"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "wikidata": "Q8678",
+        "place_name": "Rio De Janeiro, Rio De Janeiro, Brazil",
+        "type": "city",
+        "infection_level": 0
+      },
+      "geometry": {
+        "coordinates": [
+          -43.2094,
+          -22.911
+        ],
+        "type": "Point"
+      },
+      "id": "place.12892673545980170"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "wikidata": "Q172",
+        "place_name": "Toronto, Ontario, Canada",
+        "type": "city",
+        "infection_level": 0
+      },
+      "geometry": {
+        "coordinates": [
+          -79.3849,
+          43.6529
+        ],
+        "type": "Point"
+      },
+      "id": "place.1521272661948910"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "short_code": "IQ-BG",
+        "wikidata": "Q1530",
+        "place_name": "Baghdad, Iraq",
+        "type": "city",
+        "title": "Baghdad",
+        "infection_level": 0
+      },
+      "geometry": {
+        "coordinates": [
+          44.41667,
+          33.35
+        ],
+        "type": "Point"
+      },
+      "id": "place.6549908517544590"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "wikidata": "Q65",
+        "place_name": "Los Angeles, California, United States",
+        "type": "city",
+        "infection_level": 0
+      },
+      "geometry": {
+        "coordinates": [
+          -118.2439,
+          34.0544
+        ],
+        "type": "Point"
+      },
+      "id": "place.7397503093427640"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "wikidata": "Q649",
+        "place_name": "Москва, Город Москва, Russia",
+        "type": "city",
+        "infection_level": 0
+      },
+      "geometry": {
+        "coordinates": [
+          37.61778,
+          55.75583
+        ],
+        "type": "Point"
+      },
+      "id": "place.9707587740083070"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "short_code": "JP-13",
+        "wikidata": "Q1490",
+        "place_name": "東京都, Japan",
+        "type": "city",
+        "infection_level": 0
+      },
+      "geometry": {
+        "coordinates": [
+          139.77,
+          35.68
+        ],
+        "type": "Point"
+      },
+      "id": "region.15637623541111140"
+    }
+  ],
+  "type": "FeatureCollection"
+}

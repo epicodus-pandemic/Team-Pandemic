@@ -5,14 +5,15 @@
     <title>Team Pandemic</title>
   </head>
   <body>
-    <div class="container">
+    <div class="container-fluid">
       <div id="pageHeadingDiv">      
         <h1>Pandemic</h1>
         <p>save the world from disease</p>
+        <button class="btn btn-lg btn-light" id="newGameButton">Start new game!</button>
         <hr>
       </div>
       <div class="row" id="gameBoardDiv">
-        <div class="col col-3" id="scoreBoardDiv">
+        <div class="col col-2" id="scoreBoardDiv">
           <div id="statsDiv">
             <h4>Game Statistics</h4>
             <p><span id="currentMonth">February</span> <span id="currentYear">2020</span></p>
@@ -22,71 +23,84 @@
                 <th>Infection Level</th>
               </thead>
               <tbody>
+                  <tr>
+                    <td>Baghdad</td>
+                    <td id="city-4-disease">0</td>
+                  </tr>
                 <tr>
-                  <td>Beijing</td>
-                  <td id="Beijing-disease">0</td>
-                </tr>
-                <tr>
-                  <td>Cairo</td>
-                  <td id="Cairo-disease">0</td>
+                  <td>Bangkok</td>
+                  <td id="city-5-disease">0</td>
                 </tr>
                 <tr>
                   <td>Los Angeles</td>
-                  <td id="LosAngeles-disease">0</td>
+                  <td id="city-8-disease">0</td>
                 </tr>
                 <tr>
                   <td>Moscow</td>
-                  <td id="Moscow-disease">0</td>
+                  <td id="city-9-disease">0</td>
+                </tr>
+                <tr>
+                  <td>Nairobi</td>
+                  <td id="city-6-disease">0</td>
                 </tr>
                 <tr>
                   <td>Paris</td>
-                  <td id="Paris-disease">0</td>
+                  <td id="city-1-disease">0</td>
                 </tr>
                 <tr>
                   <td>Rio de Janeiro </td>
-                  <td id="Rio-disease">0</td>
+                  <td id="city-7-disease">0</td>
                 </tr>
                 <tr>
                   <td>Seattle</td>
-                  <td id="seattle-disease">0</td>
+                  <td id="city-2-disease">0</td>
                 </tr>
                 <tr>
                   <td>Tokyo</td>
-                  <td id="Tokyo-disease">0</td>
+                  <td id="city-0-disease">0</td>
                 </tr>
                 <tr>
                   <td>Toronto</td>
-                  <td id="Toronto-disease">0</td>
+                  <td id="city-3-disease">0</td>
                 </tr>
               </tbody>
             </table>
           </div>
           <div id="playerDiv">
-          <h4>Player Statistics</h4>
-          <p>Current Player: <span id="currentPlayer">1</span></p>
-          <table>
-            <thead>
-              <th>Stat</th>
-              <th>Count</th>
-            </thead>
-            <tbody>
-              <tr>
-                <td>Actions Remaining</td>
-                <td id="actionCount">0</td>
-              </tr>
-              <tr>
-                <td>Cure Research Completed</td>
-                <td id="Cairo-disease">0%</td>
-              </tr>
-            </tbody>
-          </table>
-      
-      
+            <h4>Player Statistics</h4>
+            <p>Current Player: <span id="currentPlayer">1</span></p>
+            <table>
+              <thead>
+                <th>Stat</th>
+                <th>Count</th>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Current Location</td>
+                  <td id="currentLocation"></td>
+                </tr>
+                <tr>
+                  <td>Actions Remaining</td>
+                  <td id="actionCount">0</td>
+                </tr>
+                <tr>
+                  <td>Cure Research Completed</td>
+                  <td id="researchPoints">0%</td>
+                </tr>
+              </tbody>
+            </table>
           </div>
         </div>
-        <div class="col col-9" id="mapDiv">
+        <div class="col col-10" id="mapDiv">
         <!-- <img src="./map.jpg" alt="the pandemic map"> -->
         </div>
+      </div>
+      <div class="control-panel" id="controlPanel">
+        <br>
+        <button class="btn btn-lg btn-light" id="treatBtn">Treat Infection</button>
+        <button class="btn btn-lg btn-light" id="travelBtn">Travel to a Connecting City</button>
+        <button class="btn btn-lg btn-light" id="researchBtn">Research for a Cure</button>
+        <button class="btn btn-lg btn-light" id="endTurnBtn">End Turn</button>
       </div>
       <div id="gameOverDiv">
         <h2>Game Over</h2>
@@ -97,28 +111,6 @@
           <h3>You Lose.</h3>
         </div>
       </div>
-
-      <!-- <button id="startButton">Start!</button>
-      <button id="devButton">Update!</button>
-      <button id="endButton">New Game!</button>
-      <button id="Treat">Treat Current City</button>
-      <br>
-      <br>
-      <p>Timer: </p>
-      <div id="timer"></div>
-
-      <p id="actionPoint">Player 1 actions available: <span id="currentActionPoints">0</span></p>
-
-      <p id="location">Player 1 is located in: <span id="currentLocation"></span></p>
-
-      <p id="seattle">Cases in Seattle: <span id="currentDiseaseCount-seattle">0</span></p>      
-      <button id="seattleButton">Move to Seattle</button>
-
-      <p id="paris">Cases in Paris: <span id="currentDiseaseCount-paris">0</span></p>      
-      <button id="parisButton">Move to Paris</button>
-
-      <p id="tokyo">Cases in Tokyo: <span id="currentDiseaseCount-tokyo">0</span></p>
-      <button id="seattleButton">Move to Tokyo</button> -->
     </div>
   </body>
 </html>
