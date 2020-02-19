@@ -102,6 +102,12 @@ export class Game {
     this.player.actionPoints --;
   }
 
+  infectRandom(){
+    let randomCityPositionNumber = Math.floor(Math.random() * 11); 
+    let randomCity = this.cities[randomCityPositionNumber];
+    this.infect(randomCity);
+  }
+
   infect(cityObj){
     if(cityObj.diseaseCount == 3){ 
      this.infectConnection(cityObj);
