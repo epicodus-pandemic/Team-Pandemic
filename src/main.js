@@ -24,17 +24,7 @@ var map = new mapboxgl.Map({
 
 
 
-let game;
-let tokyo = game.tokyo;
-let paris = game.paris;
-let seattle = game.cities[2];
-let toronto = game.toronto;
-let baghdad = game.baghdad;
-let bankgkok = game.bangkok;
-let nairobi = game.nairobi;
-let rio = game.rio;
-let la = game.la;
-let moscow = game.moscow;
+let game // = new Game();
 
 function updateGameVars(){
   $("#actionCount").text(game.player.actionPoints);
@@ -42,14 +32,11 @@ function updateGameVars(){
   $("#researchPoints").text(game.player.researchPoints*10 + "%");
   $("#currentMonth").text("March"); // use the turn count to generate
   $("#currentYear").text("2021");
+  $("#total-disease").text(game.getTotalDiseaseCount());
 
   for (let i = 0; i < game.cities.length; i++){
     console.log(game.cities[i]);
     $(`#city-${i}-disease`).text(game.cities[i].diseaseCount);
-  }
-
-  for (let i = 0; i < game.cities.length; i++){
-    console.log(game.cities[i].diseaseCount);
   }
 }
 
@@ -70,10 +57,21 @@ function updateControlPanel(){
 
 function checkWin(){
   game.checkWin();
+  game.checkLoss();
   if (game.isGameWon === true){
     $("#gameOverDiv").show();
     $("#winScreen").show();
     $("#loseScreen").hide();
+    $("#gameBoardDiv").hide();
+
+    $("#treatBtn").hide();
+    $("#travelBtn").hide();
+    $("#researchBtn").hide();
+    $("#endTurnBtn").hide();
+  } else if (game.isGameLost === true){
+    $("#gameOverDiv").show();
+    $("#winScreen").hide();
+    $("#loseScreen").show();
     $("#gameBoardDiv").hide();
 
     $("#treatBtn").hide();
@@ -85,14 +83,27 @@ function checkWin(){
 
 $(document).ready(function() {
     $("#newGameButton").click(function(){ 
-      game = new Game;
+      game = new Game();
       game.player.currentLocation = 2;
+      let tokyo = game.tokyo;
+      let paris = game.paris;
+      let seattle = game.cities[2];
+      let toronto = game.toronto;
+      let baghdad = game.baghdad;
+      let bankgkok = game.bangkok;
+      let nairobi = game.nairobi;
+      let rio = game.rio;
+      let la = game.la;
+      let moscow = game.moscow;
 
       //modify "initial infection round"
       game.increaseInfection(seattle)
       game.increaseInfection(seattle)
       game.increaseInfection(seattle)
-      console.log(seattle);
+      console.log(game.seattle);
+      console.log(seattle.diseaseCount);
+      console.log(game.cities[2]);
+      console.log(game.totalDisease);
 
       updateGameVars();
 
@@ -124,12 +135,15 @@ $(document).ready(function() {
         // increase the turn count
         // check win
         // reset action points
-        updateGameVars();
-        updateControlPanel();
 
         // COMPUTER ROUND
-        // infect cities... 
-        // check loss
+        game.infectRandom();
+        game.infectRandom();
+        
+
+        updateGameVars();
+        updateControlPanel();
+        checkWin();
       })
 
     })

@@ -38,7 +38,7 @@ describe("City", () => {
   })
   test("move count should increase when action points equal zero, and infection increases", ()=>{
     // game.player.actionPoints = 0
-    game.countTurn();
+    game.endTurn();
     expect(game.turnCount).toEqual(1)
     expect(game.player.actionPoints).toEqual(4)
   })
@@ -61,19 +61,19 @@ describe("City", () => {
     game.player.research();
     game.player.research();
     expect (game.player.researchPoints).toEqual(10);
-    game.countTurn();
+    game.endTurn();
     expect (game.isGameWon).toEqual(true);
   })
   test ("eradicating disease points on the board should fufill win condition", () => {
     game.totalDisease = 0;
     game.increaseInfection(game.bangkok);
-    game.countTurn();
+    game.endTurn();
     expect (game.isGameWon).toEqual(false);
   })
 
   test ("eradicating disease points on the board should fufill win condition", () => {
     game.totalDisease = 25;
-    game.countTurn();
+    game.endTurn();
     expect (game.isGameLost).toEqual(true);
   })
 

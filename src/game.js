@@ -46,22 +46,22 @@ class City {
 
 export class Game {
   constructor(){
-    this.tokyo = new City("tokyo");
-    this.paris = new City("paris");
-    this.seattle = new City("seattle"); 
-    this.toronto = new City("toronto");
-    this.baghdad = new City("baghdad");
-    this.bangkok = new City("bangkok");
-    this.nairobi = new City("nairobi");
-    this.rio = new City("rio");
-    this.la = new City("la");
-    this.moscow = new City("moscow");
+    this.tokyo = new City("Tokyo");
+    this.paris = new City("Paris");
+    this.seattle = new City("Seattle"); 
+    this.toronto = new City("Toronto");
+    this.baghdad = new City("Baghdad");
+    this.bangkok = new City("Bangkok");
+    this.nairobi = new City("Nairobi");
+    this.rio = new City("Rio de Janeiro");
+    this.la = new City("Los Angeles");
+    this.moscow = new City("Moscow");
     this.isGameWon = false;
     this.isGameLost = false;
     this.cities = [this.tokyo, this.paris, this.seattle, this.toronto, this.baghdad, this.bangkok, this.nairobi, this.rio, this.la, this.moscow];
     this.player = new Player();
     this.turnCount= 0;
-    this.totalDisease = 1;
+    this.totalDisease;
 
     this.bangkok.addConnections([this.moscow, this.baghdad, this.tokyo, this.la]);
     this.tokyo.addConnections([this.seattle, this.bangkok,this.moscow]);
@@ -76,7 +76,9 @@ export class Game {
   }
 
   checkWin(){
-    if(this.player.researchPoints === 10 || this.totalDisease === 0)
+    //console.log("research points at ", this.player.researchPoints);
+    //console.log("disease points at ", this.totalDisease);
+    if(this.player.researchPoints === 10 || this.getTotalDiseaseCount() === 0)
     {
       this.isGameWon = true
     }
@@ -84,7 +86,7 @@ export class Game {
 
   checkLoss(){
     let lossThreshold = this.cities.length * 3;
-    if(this.totalDisease > (lossThreshold * 4)/5)
+    if(this.getTotalDiseaseCount() > (lossThreshold * 4)/5)
     {
       return this.isGameLost = true
     }
@@ -116,6 +118,7 @@ export class Game {
   }
 
   infect(cityObj){
+    console.log("attempt to hit: ",cityObj.name);
     if(cityObj.diseaseCount == 3){ 
      this.infectConnection(cityObj);
     } else {
@@ -124,8 +127,11 @@ export class Game {
   }
 
   increaseInfection(cityObj){
-    cityObj.diseaseCount ++;
-    this.checkLoss();
+    if(cityObj.diseaseCount < 3){
+      console.log("increase disease",cityObj.name);
+      cityObj.diseaseCount ++;
+      this.checkLoss();
+    }
   }
 
   infectConnection(cityObj){
