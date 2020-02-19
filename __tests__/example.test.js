@@ -107,7 +107,7 @@ describe("City", () => {
     expect(game.player.actionPoints).toEqual(3);
   })
 
-  test("Infects a random city", () => {
+  test("Infects a random city should fail", () => {
     game.infectRandom();
     expect(game.tokyo.diseaseCount).toEqual(0);
     expect(game.paris.diseaseCount).toEqual(0);
