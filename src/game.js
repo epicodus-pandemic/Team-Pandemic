@@ -12,15 +12,6 @@ export class Player {
     this.actionPoints = num;
   }
 
-  setLimit(game){
-    if(this.actionPoints <= 0){
-      this.actionPoints = 0;
-    } if( this.researchPoints >= 20){
-      this.researchPoints = 20;
-      game.isGameWon = true;
-    }
-  }
-
   treat(city){
     if (city.diseaseCount > 0) {
       this.actionPoints --;
@@ -31,12 +22,12 @@ export class Player {
   research(){
     this.researchPoints ++;
     this.actionPoints --;
-    }
+  }
 }
 
 class City {
   constructor(name){
-    this.name = name
+    this.name = name;
     this.diseaseCount = 0;
     this.connections = [];
   }
@@ -72,7 +63,7 @@ export class Game {
     this.baghdad.addConnections([this.bangkok, this.nairobi, this.paris]);
     this.nairobi.addConnections([this.rio, this.baghdad]);
     this.rio.addConnections([this.la, this.nairobi]);
-    this.la.addConnections([this.bangkok, this.seattle, this.rio])                                                                       
+    this.la.addConnections([this.bangkok, this.seattle, this.rio]);
     this.moscow.addConnections([this.paris, this.bangkok, this.tokyo]);
   }
 
@@ -81,7 +72,7 @@ export class Game {
     //console.log("disease points at ", this.totalDisease);
     if(this.player.researchPoints === 20 || this.getTotalDiseaseCount() === 0)
     {
-      this.isGameWon = true
+      this.isGameWon = true;
     }
   }
 
@@ -89,7 +80,7 @@ export class Game {
     let lossThreshold = this.cities.length * 3;
     if(this.getTotalDiseaseCount() > (lossThreshold * 2)/3)
     {
-      return this.isGameLost = true
+      return this.isGameLost = true;
     }
   }
 
@@ -122,7 +113,7 @@ export class Game {
 
   infect(cityObj){
     if(cityObj.diseaseCount == 3){ 
-     this.infectConnection(cityObj);
+      this.infectConnection(cityObj);
     } else {
       this.increaseInfection(cityObj);
     }
