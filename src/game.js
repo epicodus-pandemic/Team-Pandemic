@@ -15,8 +15,8 @@ export class Player {
   setLimit(game){
     if(this.actionPoints <= 0){
       this.actionPoints = 0;
-    } if( this.researchPoints >= 10){
-      this.researchPoints = 10;
+    } if( this.researchPoints >= 20){
+      this.researchPoints = 20;
       game.isGameWon = true;
     }
   }
@@ -79,7 +79,7 @@ export class Game {
   checkWin(){
     //console.log("research points at ", this.player.researchPoints);
     //console.log("disease points at ", this.totalDisease);
-    if(this.player.researchPoints === 10 || this.getTotalDiseaseCount() === 0)
+    if(this.player.researchPoints === 20 || this.getTotalDiseaseCount() === 0)
     {
       this.isGameWon = true
     }
@@ -87,7 +87,7 @@ export class Game {
 
   checkLoss(){
     let lossThreshold = this.cities.length * 3;
-    if(this.getTotalDiseaseCount() > (lossThreshold * 4)/5)
+    if(this.getTotalDiseaseCount() > (lossThreshold * 2)/3)
     {
       return this.isGameLost = true
     }
@@ -121,7 +121,6 @@ export class Game {
   }
 
   infect(cityObj){
-    console.log("attempt to hit: ",cityObj.name);
     if(cityObj.diseaseCount == 3){ 
      this.infectConnection(cityObj);
     } else {
@@ -131,7 +130,6 @@ export class Game {
 
   increaseInfection(cityObj){
     if(cityObj.diseaseCount < 3){
-      console.log("increase disease",cityObj.name);
       cityObj.diseaseCount ++;
       this.checkLoss();
     }
