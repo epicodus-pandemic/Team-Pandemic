@@ -1,0 +1,9 @@
+#gameOverDiv {
+  display: none;
+}
+
+body {
+  background-color: #343456;
+  color: white;
+  text-align: center;
+}
