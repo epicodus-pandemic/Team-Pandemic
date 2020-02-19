@@ -95,7 +95,7 @@ export class Game {
 
   endTurn(){
     this.turnCount ++;
-    this.player.setActionPoints(4);
+    this.player.setActionPoints(3);
     this.checkWin();
   }
 

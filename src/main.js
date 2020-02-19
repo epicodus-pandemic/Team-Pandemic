@@ -62,16 +62,22 @@ function checkWin(){
   }
 }
 
+function checkSameCity(city) {
+  return city === this;
+}
+
 function setTravelButtons(){
+  for (let i = 0; i < game.cities.length; i++){
+    $(`#city-${i}-btn`).hide();
+  }
+
   let currentCity = game.cities[game.player.currentLocation];
-  let innerHTML = "";
+
   for (let i = 0; i < currentCity.connections.length; i++){
     let currentConnection = currentCity.connections[i];
-    let currentConnectionIndex = game.cities.findIndex(currentConnection);
-    console.log(currentConnection.name);
-    innerHTML += `<button class="dropdown-item" id="city-${currentConnectionIndex}-btn">${currentConnection.name}</button>`;
+    let currentConnectionIndex = game.cities.findIndex(checkSameCity, currentConnection);
+    $(`#city-${currentConnectionIndex}-btn`).show();
   }
-  $(`#travelBtns`).text(innerHTML);
 }
 
 $(document).ready(function() {
@@ -86,7 +92,7 @@ $(document).ready(function() {
       let player1 = new Player(gamesCount);
       game = new Game(player1);
       game.player.currentLocation = Math.floor(Math.random() * 10);
-      game.infectRandom(4);
+      game.infectRandom(8);
 
       updateControlPanel();
       updateGameVars();
@@ -100,8 +106,6 @@ $(document).ready(function() {
     })
 
     $("#travelBtn").click(function(){ 
-      updateGameVars();
-      updateControlPanel();
     })
 
     $("#researchBtn").click(function(){ 
@@ -119,11 +123,69 @@ $(document).ready(function() {
       checkWin();
     })
 
-    $("#la-btn").click(function(){
-      console.log("hi steven");
+    // $("#la-btn").click(function(){
+    //   console.log("hi steven");
+    // })
+    $("#city-0-btn").click(function(){
+      game.setPlayerLocation(game.cities.findIndex(checkSameCity, game.tokyo));
+      updateGameVars();
+      updateControlPanel();
+      console.log("hi tokyo");
     })
-    $("#tokyo-btn").click(function(){
-      console.log("hi ^_^");
+    $("#city-1-btn").click(function(){
+      game.setPlayerLocation(game.cities.findIndex(checkSameCity, game.paris));
+      updateGameVars();
+      updateControlPanel();
+      console.log("hi Paris");
     })
+    $("#city-2-btn").click(function(){
+      game.setPlayerLocation(game.cities.findIndex(checkSameCity, game.seattle));
+      updateGameVars();
+      updateControlPanel();
+      console.log("hi Seattle");
+    })
+    $("#city-3-btn").click(function(){
+      game.setPlayerLocation(game.cities.findIndex(checkSameCity, game.toronto));
+      updateGameVars();
+      updateControlPanel();
+      console.log("hi Toronto");
+    })
+    $("#city-4-btn").click(function(){
+      game.setPlayerLocation(game.cities.findIndex(checkSameCity, game.baghdad));
+      updateGameVars();
+      updateControlPanel();
+      console.log("hi Baghdad");
+    })
+    $("#city-5-btn").click(function(){
+      game.setPlayerLocation(game.cities.findIndex(checkSameCity, game.bangkok));
+      updateGameVars();
+      updateControlPanel();
+      console.log("hi Bangkok");
+    })
+    $("#city-6-btn").click(function(){
+      game.setPlayerLocation(game.cities.findIndex(checkSameCity, game.nairobi));
+      updateGameVars();
+      updateControlPanel();
+      console.log("hi Nairobi");
+    })
+    $("#city-7-btn").click(function(){
+      game.setPlayerLocation(game.cities.findIndex(checkSameCity, game.rio));
+      updateGameVars();
+      updateControlPanel();
+      console.log("hi Rio");
+    })
+    $("#city-8-btn").click(function(){
+      game.setPlayerLocation(game.cities.findIndex(checkSameCity, game.la));
+      updateGameVars();
+      updateControlPanel();
+      console.log("hi Los Angeles");
+    })
+    $("#city-9-btn").click(function(){
+      game.setPlayerLocation(game.cities.findIndex(checkSameCity, game.moscow));
+      updateGameVars();
+      updateControlPanel();
+      console.log("hi Moscow");
+    })
+
 })
 
