@@ -21,7 +21,7 @@ let game;
 function updateGameVars(){
   $("#actionCount").text(game.player.actionPoints);
   $("#currentLocation").text(game.cities[game.player.currentLocation].name);
-  $("#researchPoints").text(game.player.researchPoints*10 + "%");
+  $("#researchPoints").text(game.player.researchPoints*5 + "%");
   $("#currentMonth").text("March"); // use the turn count to generate
   $("#currentYear").text("2021");
   $("#total-disease").text(game.getTotalDiseaseCount());
