@@ -50,7 +50,7 @@ export class Game {
     this.moscow = new City("moscow");
     this.isGameWon = false;
     this.isGameLost = false;
-    this.cities = [this.tokyo, this.paris, this.seattle, this.toronto, this.baghdad, this.bangkok, this.nairobi, this.rio,this.la, this.moscow];
+    this.cities = [this.tokyo, this.paris, this.seattle, this.toronto, this.baghdad, this.bangkok, this.nairobi, this.rio, this.la, this.moscow];
     this.player = new Player();
     this.turnCount= 0;
     this.totalDisease = 1;
@@ -116,7 +116,7 @@ export class Game {
         }
       }
     } else {
-     increaseInfection(this.cities[cityIndex]);
+      this.increaseInfection(this.cities[cityIndex]);
     }
     console.log("after infect/ disease in seattle: ", this.cities[2].diseaseCount);
   }
