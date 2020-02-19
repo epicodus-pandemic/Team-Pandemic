@@ -35,7 +35,6 @@ function updateGameVars(){
   $("#total-disease").text(game.getTotalDiseaseCount());
 
   for (let i = 0; i < game.cities.length; i++){
-    console.log(game.cities[i]);
     $(`#city-${i}-disease`).text(game.cities[i].diseaseCount);
   }
 }
@@ -63,47 +62,40 @@ function checkWin(){
     $("#winScreen").show();
     $("#loseScreen").hide();
     $("#gameBoardDiv").hide();
-
-    $("#treatBtn").hide();
-    $("#travelBtn").hide();
-    $("#researchBtn").hide();
-    $("#endTurnBtn").hide();
+    $("#controlPanel").hide();
   } else if (game.isGameLost === true){
     $("#gameOverDiv").show();
     $("#winScreen").hide();
     $("#loseScreen").show();
     $("#gameBoardDiv").hide();
-
-    $("#treatBtn").hide();
-    $("#travelBtn").hide();
-    $("#researchBtn").hide();
-    $("#endTurnBtn").hide();
+    $("#controlPanel").hide();
   }
 }
 
 $(document).ready(function() {
     $("#newGameButton").click(function(){ 
+      $("#gameBoardDiv").show();
+      $("#gameOverDiv").hide();
+      $("#controlPanel").show();
+
       game = new Game();
       game.player.currentLocation = 2;
-      let tokyo = game.tokyo;
-      let paris = game.paris;
-      let seattle = game.cities[2];
-      let toronto = game.toronto;
-      let baghdad = game.baghdad;
-      let bankgkok = game.bangkok;
-      let nairobi = game.nairobi;
-      let rio = game.rio;
-      let la = game.la;
-      let moscow = game.moscow;
+      // let tokyo = game.tokyo;
+      // let paris = game.paris;
+      // let seattle = game.cities[2];
+      // let toronto = game.toronto;
+      // let baghdad = game.baghdad;
+      // let bankgkok = game.bangkok;
+      // let nairobi = game.nairobi;
+      // let rio = game.rio;
+      // let la = game.la;
+      // let moscow = game.moscow;
 
       //modify "initial infection round"
-      game.increaseInfection(seattle)
-      game.increaseInfection(seattle)
-      game.increaseInfection(seattle)
-      console.log(game.seattle);
-      console.log(seattle.diseaseCount);
-      console.log(game.cities[2]);
-      console.log(game.totalDisease);
+      // game.increaseInfection(seattle)
+      // game.increaseInfection(seattle)
+      // game.increaseInfection(seattle)
+      game.infectRandom(6);
 
       updateGameVars();
 
@@ -137,8 +129,7 @@ $(document).ready(function() {
         // reset action points
 
         // COMPUTER ROUND
-        game.infectRandom();
-        game.infectRandom();
+        game.infectRandom(2);
         
 
         updateGameVars();

@@ -111,10 +111,12 @@ export class Game {
     this.player.actionPoints --;
   }
 
-  infectRandom(){
-    let randomCityPositionNumber = Math.floor(Math.random() * 10); 
-    let randomCity = this.cities[randomCityPositionNumber];
-    this.infect(randomCity);
+  infectRandom(num){
+    for (let i = 0; i < num; i++){
+      let randomCityPositionNumber = Math.floor(Math.random() * 10); 
+      let randomCity = this.cities[randomCityPositionNumber];
+      this.infect(randomCity);
+    }
   }
 
   infect(cityObj){
