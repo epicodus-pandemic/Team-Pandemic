@@ -12,12 +12,12 @@ var map = new mapboxgl.Map({
   style: 'mapbox://styles/kristarutz/ck6r0bnj10oui1irvwnqjyp9u',
   zoom: 0.5,
   minZoom: 0.5,
-  maxZoom: 5,
+  maxZoom: 12,
   center: [-100,35]
 });
 
-var size = 200;
- 
+const size = 120;
+
 // implementation of CustomLayerInterface to draw a pulsing dot icon on the map
 // see https://docs.mapbox.com/mapbox-gl-js/api/#customlayerinterface for more info
 var pulsingDot = {
@@ -27,6 +27,13 @@ var pulsingDot = {
  
   // get rendering context for the map canvas when layer is added to the map
   onAdd: function() {
+    var canvas = document.createElement('canvas');
+    canvas.width = this.width;
+    canvas.height = this.height;
+    this.context = canvas.getContext('2d');
+    },
+  
+  onRemove: function() {
     var canvas = document.createElement('canvas');
     canvas.width = this.width;
     canvas.height = this.height;
@@ -45,25 +52,13 @@ var pulsingDot = {
     // draw outer circle
     context.clearRect(0, 0, this.width, this.height);
     context.beginPath();
-    context.arc(
-      this.width / 2,
-      this.height / 2,
-      outerRadius,
-      0,
-      Math.PI * 2
-    );
+    context.arc(this.width / 2, this.height / 2, outerRadius, 0, Math.PI * 2);
     context.fillStyle = 'rgba(255, 200, 200,' + (1 - t) + ')';
     context.fill();
   
     // draw inner circle
     context.beginPath();
-    context.arc(
-    this.width / 2,
-    this.height / 2,
-    radius,
-    0,
-    Math.PI * 2
-    );
+    context.arc(this.width / 2, this.height / 2, radius, 0, Math.PI * 2);
     context.fillStyle = 'rgba(255, 100, 100, 1)';
     context.strokeStyle = 'white';
     context.lineWidth = 2 + 4 * (1 - t);
@@ -71,12 +66,7 @@ var pulsingDot = {
     context.stroke();
  
     // update this image's data with data from the canvas
-    this.data = context.getImageData(
-    0,
-    0,
-    this.width,
-    this.height
-    ).data;
+    this.data = context.getImageData(0, 0, this.width, this.height).data;
     
     // continuously repaint the map, resulting in the smooth animation of the dot
     map.triggerRepaint();
@@ -86,7 +76,48 @@ var pulsingDot = {
   }
 };
  
-map.on('load', function() {
+// map.on('load', function() {
+//   map.addImage('pulsing-dot', pulsingDot, { pixelRatio: 2 });
+
+//     map.addSource('points', {
+//       'type': 'geojson',
+//       'data': {
+//         'type': 'FeatureCollection',
+//           'features': [
+//             {
+//             'type': 'Feature',
+//             'geometry': {
+//               'type': 'Point',
+//               'coordinates': [-100,35]
+//             }
+//           }
+//         ]
+//       }
+//     });
+//     map.addLayer({
+//       'id': 'points',
+//       'type': 'symbol',
+//       'source': 'points',
+//       'layout': {
+//         'icon-image': 'pulsing-dot'
+//       }
+//    });
+// });
+
+// GAME PLAY LOGIC ------------------------------------------------------------
+
+let game;
+
+function updateMap(city){
+  if (map.getLayer('points')){
+    map.removeLayer('points');
+  }
+  if (map.getSource('points')){
+    map.removeSource('points');
+  }
+  if (map.hasImage('pulsing-dot')){
+    map.removeImage('pulsing-dot');
+  }
   map.addImage('pulsing-dot', pulsingDot, { pixelRatio: 2 });
 
     map.addSource('points', {
@@ -98,7 +129,7 @@ map.on('load', function() {
             'type': 'Feature',
             'geometry': {
               'type': 'Point',
-              'coordinates': [-122, 47]
+              'coordinates': city.coord
             }
           }
         ]
@@ -111,10 +142,8 @@ map.on('load', function() {
       'layout': {
         'icon-image': 'pulsing-dot'
       }
-   });
-});
-
-let game;
+  });
+}
 
 function updateGameVars(){
   $("#actionCount").text(game.player.actionPoints);
@@ -168,9 +197,7 @@ function setTravelButtons(){
   for (let i = 0; i < game.cities.length; i++){
     $(`#city-${i}-btn`).hide();
   }
-
   let currentCity = game.cities[game.player.currentLocation];
-
   for (let i = 0; i < currentCity.connections.length; i++){
     let currentConnection = currentCity.connections[i];
     let currentConnectionIndex = game.cities.findIndex(checkSameCity, currentConnection);
@@ -178,6 +205,7 @@ function setTravelButtons(){
   }
 }
 
+// On Screen --------------------------------------------------------------------
 $(document).ready(function() {
   let gamesCount = 0;
   const INITIAL_DISEASE = 8;
@@ -196,11 +224,13 @@ $(document).ready(function() {
     $("#gameOverDiv").hide();
     $("#controlPanel").show();
     
-
     let player1 = new Player(gamesCount);
     game = new Game(player1);
     game.player.currentLocation = Math.floor(Math.random() * 10);
     game.infectRandom(INITIAL_DISEASE);
+
+    let startCity = game.cities[game.player.currentLocation];
+    updateMap(startCity);
 
     updateControlPanel();
     updateGameVars();
