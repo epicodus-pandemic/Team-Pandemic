@@ -124,7 +124,6 @@ function updateGameVars(){
   $("#currentMonth").text("March"); // use the turn count to generate
   $("#currentYear").text("2021");
   $("#total-disease").text(game.getTotalDiseaseCount());
-
   for (let i = 0; i < game.cities.length; i++){
     $(`#city-${i}-disease`).text(game.cities[i].diseaseCount);
   }
@@ -200,6 +199,9 @@ $(document).ready(function() {
     $("#gameBoardDiv").show();
     $("#gameOverDiv").hide();
     $("#controlPanel").show();
+    $("#difficulty").text("Easy");
+ 
+
 
     let player1 = new Player(gamesCount);
     game = new Game(player1);
@@ -219,6 +221,8 @@ $(document).ready(function() {
     $("#gameBoardDiv").show();
     $("#gameOverDiv").hide();
     $("#controlPanel").show();
+    $("#difficulty").text("Hard");
+
 
     let player1 = new Player(gamesCount);
     game = new Game(player1);
