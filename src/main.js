@@ -205,6 +205,12 @@ function setTravelButtons(){
   }
 }
 
+function updateDisplay(){
+  updateMap(game.cities[game.player.currentLocation]);
+  updateGameVars();
+  updateControlPanel();
+}
+
 // On Screen --------------------------------------------------------------------
 $(document).ready(function() {
   let gamesCount = 0;
@@ -260,53 +266,43 @@ $(document).ready(function() {
 
   $("#city-0-btn").click(function(){
     game.setPlayerLocation(game.cities.findIndex(checkSameCity, game.tokyo));
-    updateGameVars();
-    updateControlPanel();
+    updateDisplay();
   });
   $("#city-1-btn").click(function(){
     game.setPlayerLocation(game.cities.findIndex(checkSameCity, game.paris));
-    updateGameVars();
-    updateControlPanel();
+    updateDisplay()
   });
   $("#city-2-btn").click(function(){
     game.setPlayerLocation(game.cities.findIndex(checkSameCity, game.seattle));
-    updateGameVars();
-    updateControlPanel();
+    updateDisplay()
   });
   $("#city-3-btn").click(function(){
     game.setPlayerLocation(game.cities.findIndex(checkSameCity, game.toronto));
-    updateGameVars();
-    updateControlPanel();
+    updateDisplay()
   });
   $("#city-4-btn").click(function(){
     game.setPlayerLocation(game.cities.findIndex(checkSameCity, game.baghdad));
-    updateGameVars();
-    updateControlPanel();
+    updateDisplay()
   });
   $("#city-5-btn").click(function(){
     game.setPlayerLocation(game.cities.findIndex(checkSameCity, game.bangkok));
-    updateGameVars();
-    updateControlPanel();
+    updateDisplay()
   });
   $("#city-6-btn").click(function(){
     game.setPlayerLocation(game.cities.findIndex(checkSameCity, game.nairobi));
-    updateGameVars();
-    updateControlPanel();
+    updateDisplay()
   });
   $("#city-7-btn").click(function(){
     game.setPlayerLocation(game.cities.findIndex(checkSameCity, game.rio));
-    updateGameVars();
-    updateControlPanel();
+    updateDisplay()
   });
   $("#city-8-btn").click(function(){
     game.setPlayerLocation(game.cities.findIndex(checkSameCity, game.la));
-    updateGameVars();
-    updateControlPanel();
+    updateDisplay()
   });
   $("#city-9-btn").click(function(){
     game.setPlayerLocation(game.cities.findIndex(checkSameCity, game.moscow));
-    updateGameVars();
-    updateControlPanel();
+    updateDisplay()
   });
 });
 
