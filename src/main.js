@@ -161,6 +161,8 @@ function checkWin(){
   }
 }
 
+
+
 function checkSameCity(city) {
   return city === this;
 }
@@ -186,9 +188,6 @@ function updateDisplay(){
 // On Screen --------------------------------------------------------------------
 $(document).ready(function() {
   let gamesCount = 0;
-  const INITIAL_DISEASE = 8;
-  const INFECTION_RATE = 2;
-
   $("#tutorialButton").click(function(){
     $("#tutorialIsland").show();
     $("#gameBoardDiv").hide();
@@ -201,10 +200,30 @@ $(document).ready(function() {
     $("#gameBoardDiv").show();
     $("#gameOverDiv").hide();
     $("#controlPanel").show();
-    
+
+    let player1 = new Player(gamesCount);
+    game = new Game(player1);
+    game.player.currentLocation = 5;
+    let INITIAL_DISEASE = 8;
+    game.infectRandom(INITIAL_DISEASE);
+
+    let startCity = game.cities[game.player.currentLocation];
+    updateMap(startCity);
+    updateControlPanel();
+    updateGameVars();
+  });
+
+  $("#hard").click(function(){
+    gamesCount++;
+    $("#tutorialIsland").hide();
+    $("#gameBoardDiv").show();
+    $("#gameOverDiv").hide();
+    $("#controlPanel").show();
+
     let player1 = new Player(gamesCount);
     game = new Game(player1);
     game.player.currentLocation = Math.floor(Math.random() * 10);
+    let INITIAL_DISEASE = 6
     game.infectRandom(INITIAL_DISEASE);
 
     let startCity = game.cities[game.player.currentLocation];
@@ -212,6 +231,7 @@ $(document).ready(function() {
 
     updateControlPanel();
     updateGameVars();
+    game.setHard();
   });
 
   $("#treatBtn").click(function(){  
@@ -229,8 +249,14 @@ $(document).ready(function() {
   });
 
   $("#endTurnBtn").click(function(){ 
+    if (game.hardMode === true){
+      let INFECTION_RATE = 3;
+      game.infectRandom(INFECTION_RATE);
+    } else{
+      let INFECTION_RATE = 2;
+      game.infectRandom(INFECTION_RATE);
+    }
     game.endTurn();
-    game.infectRandom(INFECTION_RATE);
     updateGameVars();
     updateControlPanel();
     checkWin();

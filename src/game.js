@@ -24,14 +24,16 @@ export class Player {
   treat(city){
     if (city.diseaseCount > 0) {
       this.actionPoints --;
-      city.diseaseCount --;                     
+      city.diseaseCount --;                 
     }
   }
 
   research(){
-    if(this.researchPoints < 20){
-      this.researchPoints ++;
-      this.actionPoints --;
+    if(this.researchPoints === 20){
+      this.researchPoints = 20
+    } else{
+    this.researchPoints ++;
+    this.actionPoints --;
     }
   }
 }
@@ -62,6 +64,7 @@ export class Game {
     this.moscow = new City("Moscow", coordMoscow);
     this.isGameWon = false;
     this.isGameLost = false;
+    this.hardMode = false;
     this.cities = [this.tokyo, this.paris, this.seattle, this.toronto, this.baghdad, this.bangkok, this.nairobi, this.rio, this.la, this.moscow];
     this.player = player;
     this.turnCount= 0;
@@ -79,10 +82,19 @@ export class Game {
     this.moscow.addConnections([this.paris, this.bangkok, this.tokyo]);
   }
 
+  setHard(){
+    this.hardMode = true;
+   }
+
   checkWin(){
-    if((this.player.researchPoints === 20 && this.getTotalDiseaseCount() < 15) || this.getTotalDiseaseCount() === 0)
-    {
-      this.isGameWon = true;
+    if (this.hardMode === true){
+      if(this.player.researchPoints === 20 && this.getTotalDiseaseCount() <=15 || this.getTotalDiseaseCount() === 0){
+        this.isGameWon = true;
+      }
+    } else {
+      if(this.player.researchPoints === 20 || this.getTotalDiseaseCount() === 0){
+        this.isGameWon = true;
+      }
     }
   }
 
