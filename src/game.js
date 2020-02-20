@@ -1,4 +1,13 @@
-// this is the branch made on steven's computer at 2:29 PM
+const coordTokyo = [139.77, 35.68];
+const coordParis = [2.35183, 48.85658];
+const coordSeattle = [ -122.3301, 47.6038];
+const coordToronto = [-79.3849, 43.6529];
+const coordBaghdad = [44.41667, 33.35];
+const coordBangkok = [100.51667,13.75];
+const coordNairobi = [36.816670, -1.283330];
+const coordRio = [-43.2094, -22.911];
+const coordLA = [-118.2439, 34.0544];
+const coordMoscow = [37.61778, 55.75583];
 
 export class Player {
   constructor(id){
@@ -15,21 +24,26 @@ export class Player {
   treat(city){
     if (city.diseaseCount > 0) {
       this.actionPoints --;
-      city.diseaseCount --;                     
+      city.diseaseCount --;                 
     }
   }
 
   research(){
+    if(this.researchPoints === 20){
+      this.researchPoints = 20
+    } else{
     this.researchPoints ++;
     this.actionPoints --;
+    }
   }
 }
 
 class City {
-  constructor(name){
+  constructor(name, coord){
     this.name = name;
     this.diseaseCount = 0;
     this.connections = [];
+    this.coord = coord;
   }
   addConnections(connectedCities){
     this.connections = connectedCities;
@@ -38,18 +52,19 @@ class City {
 
 export class Game {
   constructor(player){
-    this.tokyo = new City("Tokyo");
-    this.paris = new City("Paris");
-    this.seattle = new City("Seattle"); 
-    this.toronto = new City("Toronto");
-    this.baghdad = new City("Baghdad");
-    this.bangkok = new City("Bangkok");
-    this.nairobi = new City("Nairobi");
-    this.rio = new City("Rio de Janeiro");
-    this.la = new City("Los Angeles");
-    this.moscow = new City("Moscow");
+    this.tokyo = new City("Tokyo", coordTokyo);
+    this.paris = new City("Paris", coordParis);
+    this.seattle = new City("Seattle", coordSeattle); 
+    this.toronto = new City("Toronto", coordToronto);
+    this.baghdad = new City("Baghdad", coordBaghdad);
+    this.bangkok = new City("Bangkok", coordBangkok);
+    this.nairobi = new City("Nairobi", coordNairobi);
+    this.rio = new City("Rio de Janeiro", coordRio);
+    this.la = new City("Los Angeles", coordLA);
+    this.moscow = new City("Moscow", coordMoscow);
     this.isGameWon = false;
     this.isGameLost = false;
+    this.hardMode = false;
     this.cities = [this.tokyo, this.paris, this.seattle, this.toronto, this.baghdad, this.bangkok, this.nairobi, this.rio, this.la, this.moscow];
     this.player = player;
     this.turnCount= 0;
@@ -67,12 +82,19 @@ export class Game {
     this.moscow.addConnections([this.paris, this.bangkok, this.tokyo]);
   }
 
+  setHard(){
+    this.hardMode = true;
+   }
+
   checkWin(){
-    //console.log("research points at ", this.player.researchPoints);
-    //console.log("disease points at ", this.totalDisease);
-    if(this.player.researchPoints === 20 || this.getTotalDiseaseCount() === 0)
-    {
-      this.isGameWon = true;
+    if (this.hardMode === true){
+      if(this.player.researchPoints === 20 && this.getTotalDiseaseCount() <=15 || this.getTotalDiseaseCount() === 0){
+        this.isGameWon = true;
+      }
+    } else {
+      if(this.player.researchPoints === 20 || this.getTotalDiseaseCount() === 0){
+        this.isGameWon = true;
+      }
     }
   }
 
@@ -103,6 +125,9 @@ export class Game {
     this.player.actionPoints --;
   }
 
+  //later gameplay infections
+  
+  // inital infection round 
   infectRandom(num){
     for (let i = 0; i < num; i++){
       let randomCityPositionNumber = Math.floor(Math.random() * 10); 

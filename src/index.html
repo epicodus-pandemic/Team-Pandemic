@@ -7,10 +7,11 @@
   <body>
     <div class="container">
       <div id="pageHeadingDiv">      
-        <h1>Pandemic</h1>
-        <p>save the world from disease</p>
+        <h1>Pandemic:</h1>
+        <p>Save the world from disease</p>
         <button class="btn btn-lg btn-light" id="newGameButton">Start new game!</button>
         <button class="btn btn-lg btn-light" id="tutorialButton">Read a tutorial!</button>
+        <button class="btn btn-lg btn-light" id="hard">Start on Hard mode..If thy Dare!</button>
         <hr>
       </div>
       <div id="tutorialIsland">
@@ -98,18 +99,20 @@
               </tbody>
             </table>
           </div>
+          <br>
           <div id="playerDiv">
             <h4>Player Statistics</h4>
             <p>Current Player: <span id="currentPlayer">1</span></p>
+            <p>Difficulty: <span id="difficulty"></span></p>
             <table>
               <thead>
                 <th>Stat</th>
-                <th>Count</th>
+                <th>Data</th>
               </thead>
               <tbody>
                 <tr>
                   <td>Current Location</td>
-                  <td id="currentLocation"></td>
+                  <td id="currentLocation">100° W, 35° N</td>
                 </tr>
                 <tr>
                   <td>Actions Remaining</td>
@@ -145,7 +148,7 @@
           </div>
         </div>
         <button class="btn btn-lg btn-light" id="researchBtn">Research for a Cure</button>
-        <button class="btn btn-lg btn-light" id="endTurnBtn">End Turn</button>
+        <button class="btn btn-lg btn-danger" id="endTurnBtn">End Turn</button>
       </div>
       <div id="gameOverDiv">
         <h2>Game Over</h2>
