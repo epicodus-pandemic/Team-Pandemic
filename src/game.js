@@ -20,8 +20,10 @@ export class Player {
   }
 
   research(){
-    this.researchPoints ++;
-    this.actionPoints --;
+    if(this.researchPoints < 20){
+      this.researchPoints ++;
+      this.actionPoints --;
+    }
   }
 }
 
@@ -68,9 +70,7 @@ export class Game {
   }
 
   checkWin(){
-    //console.log("research points at ", this.player.researchPoints);
-    //console.log("disease points at ", this.totalDisease);
-    if(this.player.researchPoints === 20 || this.getTotalDiseaseCount() === 0)
+    if((this.player.researchPoints === 20 && this.getTotalDiseaseCount() < 15) || this.getTotalDiseaseCount() === 0)
     {
       this.isGameWon = true;
     }
@@ -103,6 +103,9 @@ export class Game {
     this.player.actionPoints --;
   }
 
+  //later gameplay infections
+  
+  // inital infection round 
   infectRandom(num){
     for (let i = 0; i < num; i++){
       let randomCityPositionNumber = Math.floor(Math.random() * 10); 
