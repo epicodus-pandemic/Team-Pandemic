@@ -53,13 +53,13 @@ var pulsingDot = {
     context.clearRect(0, 0, this.width, this.height);
     context.beginPath();
     context.arc(this.width / 2, this.height / 2, outerRadius, 0, Math.PI * 2);
-    context.fillStyle = 'rgba(255, 200, 200,' + (1 - t) + ')';
+    context.fillStyle = 'rgba(200, 200, 255,' + (1 - t) + ')';
     context.fill();
   
     // draw inner circle
     context.beginPath();
     context.arc(this.width / 2, this.height / 2, radius, 0, Math.PI * 2);
-    context.fillStyle = 'rgba(255, 100, 100, 1)';
+    context.fillStyle = 'rgba(100, 100, 255, 1)';
     context.strokeStyle = 'white';
     context.lineWidth = 2 + 4 * (1 - t);
     context.fill();
@@ -75,34 +75,6 @@ var pulsingDot = {
     return true;
   }
 };
- 
-// map.on('load', function() {
-//   map.addImage('pulsing-dot', pulsingDot, { pixelRatio: 2 });
-
-//     map.addSource('points', {
-//       'type': 'geojson',
-//       'data': {
-//         'type': 'FeatureCollection',
-//           'features': [
-//             {
-//             'type': 'Feature',
-//             'geometry': {
-//               'type': 'Point',
-//               'coordinates': [-100,35]
-//             }
-//           }
-//         ]
-//       }
-//     });
-//     map.addLayer({
-//       'id': 'points',
-//       'type': 'symbol',
-//       'source': 'points',
-//       'layout': {
-//         'icon-image': 'pulsing-dot'
-//       }
-//    });
-// });
 
 // GAME PLAY LOGIC ------------------------------------------------------------
 
