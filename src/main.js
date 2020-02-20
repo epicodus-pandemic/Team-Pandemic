@@ -83,7 +83,7 @@ function setTravelButtons(){
 $(document).ready(function() {
   let gamesCount = 0;
   const INITIAL_DISEASE = 8;
-  const INFECTION_RATE = 3;
+  const INFECTION_RATE = 2;
 
   $("#tutorialButton").click(function(){
     $("#tutorialIsland").show();
