@@ -1,4 +1,19 @@
+# Team Pandemic Program
 
+### By Krista Rutz, Steven Fleming, and Brevin Cronk
+
+## Description
+
+### In Pandemic, the fate of the world is in your hand, do you have what it takes to prevent humanity from being wiped out from a deadly disease?! The game runs as a turn based game in which you have a set amount of action points to spend per move. You can spend these points on researching a cure for the disease, moving to different cities around the world, and you have the ability to treat cities that are infected, use your points wisely to keep the disease under control!
+
+## Setup Instructions
+
+### To access our game you have the option to clone our code onto your own computer. From there here are the steps you will want to follow
+* ### Type "npm install" into your console.
+* ### Type "npm run build" into your console to get the build setup
+* ### Type "npm run start" in the console to open up the webpage for the game and begin playing
+
+## Specifications
 
 | Spec | Example Input | Back-end Process | Expected Output |
 | :-------------  | :-------------   | :------------- | :------------- |
@@ -20,3 +35,29 @@
 | When cure research counter reaches 10, you win! | input: "research" when research count: 9 || Game over - p1 wins!|
 | When total disease reaches 0, you win! | input: "treat" when disease count: 1 || Game over - p1 wins!|
 | When total disease is maxed out (80% of cities*3), and infection should be increased beyond the maximum, it triggers a game loss | input: infection rate at 22/27 || Game over - p1 loses!|
+
+## Who Did What
+
+* ### Steven Fleming and Brevin Cronk:
+### Steven and Brevin were tasked with creating te backend functionality to Pandemic. Steven was proud with creating the backend functions that allow us to connect cities to travel and spread infection. He also wrote the functions that simulate the disease spreading to different cities, and the rate at which the population is infected. Brevin was proud with creating the functionality that allowed the "hard" game mode, aswell as creating the infect function and working alongside Steven to help create variable disease spread.
+
+* ### Krista Rutz
+### Krista Rutz was tasked with creating the frontend functionality for Pandemic. She was incredibly pround of using a MapBox API to show the world, She used this API to add features to our map as showing the connected cities, and the current player location. She created the overall design for the UI!
+
+## Known Bugs
+### As of now the only bug we have is that the months do not update with the changing of turns. Other than that we havent been able to detect anymore bugs through our testing.
+
+## Technologies Used
+* ### HTML
+* ### CSS
+* ### JavaScript
+* ### MapBox API
+* ### Jquery
+* ### Webpacks
+* ### Jest
+* ### Babel
+* ### Eslint
+
+## License
+### MIT
+### Copyrigh (c) 2020 Krista Rutz, Steven Fleming, and Brevin Cronk
