@@ -20,3 +20,4 @@
 | When cure research counter reaches 10, you win! | input: "research" when research count: 9 || Game over - p1 wins!|
 | When total disease reaches 0, you win! | input: "treat" when disease count: 1 || Game over - p1 wins!|
 | When total disease is maxed out (80% of cities*3), and infection should be increased beyond the maximum, it triggers a game loss | input: infection rate at 22/27 || Game over - p1 loses!|
+|Animate the routes that the player chooses to travel: https://docs.mapbox.com/mapbox-gl-js/example/animate-point-along-route/|||

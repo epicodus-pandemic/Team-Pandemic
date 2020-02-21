@@ -3,6 +3,7 @@ import 'bootstrap' ;
 import 'bootstrap/dist/css/bootstrap.min.css' ; 
 import './styles.css' ;
 import { Game, Player } from './game';
+//import './assets/cities.geojson' ;
 
 var mapboxgl = require('mapbox-gl/dist/mapbox-gl.js');
  
@@ -16,10 +17,80 @@ var map = new mapboxgl.Map({
   center: [-100,35]
 });
 
+function populateDisease() {
+  let infectionData = {
+    'type': 'FeatureCollection',
+    'features': []
+  }
+  for (let i = 0; i < game.cities.length; i++){
+    for (let j = 0; j < game.cities.diseaseCount; j++){
+      let currentCityDiseasePoint = {
+        'type': 'Feature',
+        'geometry': {
+          'type': 'Point',
+          'coordinates': game.cities[i].coord
+          }
+        }
+      infectionData.features.push(currentCityDiseasePoint);
+    }
+  }
+
+  map.addSource('infection-rates', {
+    'type': 'geojson',
+    'data': infectionData
+  });
+
+  map.addLayer({
+    id: 'diseases',
+    type: 'circle',
+    source: 'infection-rates',
+    paint: {
+      // Use step expressions (https://docs.mapbox.com/mapbox-gl-js/style-spec/#expressions-step)
+      // with three steps to implement three types of circles:
+      //   * Blue, 20px circles when point count is less than 100
+      //   * Yellow, 30px circles when point count is between 100 and 750
+      //   * Pink, 40px circles when point count is greater than or equal to 750
+      'circle-color': [
+        'step',
+        ['get', 'point_count'],
+        '#51bbd6',
+        1,
+        '#f1f075',
+        2,
+        'orange',
+        3,
+        '#f28cb1'
+        ],
+      'circle-radius': [
+        'step',
+        ['get', 'point_count'],
+        10,
+        1,
+        20,
+        2,
+        30,
+        3,
+        40
+      ]
+    }
+  });
+   
+  map.addLayer({
+    id: 'cluster-count',
+    type: 'symbol',
+    source: 'infection-rates',
+    filter: ['has', 'point_count'],
+    layout: {
+      'text-field': '{point_count_abbreviated}',
+      'text-font': ['DIN Offc Pro Medium', 'Arial Unicode MS Bold'],
+      'text-size': 12
+    }
+  });
+}
+
+//////////////////////////////////////////////////////////
 const size = 120;
 
-// implementation of CustomLayerInterface to draw a pulsing dot icon on the map
-// see https://docs.mapbox.com/mapbox-gl-js/api/#customlayerinterface for more info
 var pulsingDot = {
   width: size,
   height: size,
@@ -232,7 +303,7 @@ $(document).ready(function() {
 
     let startCity = game.cities[game.player.currentLocation];
     updateMap(startCity);
-
+    populateDisease();
     updateControlPanel();
     updateGameVars();
     game.setHard();
